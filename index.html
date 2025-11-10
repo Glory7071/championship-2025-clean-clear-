@@ -148,7 +148,7 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 
 <!-- Registration -->
 <section id="registration" class="container">
-<h2>📝 टीम रजिस्ट्रेशन (₹100/- प्रति स्क्वाड)</h2>
+<h2>📝 टीम रजिस्ट्रेशन (₹99/- प्रति स्क्वाड)</h2>
 <div class="card" style="text-align:center; border-left:4px solid #FFD700;">
 <p style="font-size:1.2em; font-weight:700; color:var(--highlight-color); margin-bottom:20px;">रजिस्ट्रेशन के लिए इन 3 स्टेप्स को फॉलो करें:</p>
 <div class="reg-step">
@@ -198,12 +198,10 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 </div>
 <div class="responsive-table-wrapper">
 <table id="leaderboardTable">
-<thead><tr><th>Rank</th><th>Team</th><th>Score</th><th>Kills</th><th>Placement</th></tr></thead>
-<tbody>
-<tr data-score="150" data-kills="45" data-placement="3"><td>1</td><td>Squad Alpha</td><td>150</td><td>45</td><td>3</td></tr>
-<tr data-score="140" data-kills="42" data-placement="4"><td>2</td><td>Team Bravo</td><td>140</td><td>42</td><td>4</td></tr>
-<tr data-score="130" data-kills="38" data-placement="5"><td>3</td><td>Omega Force</td><td>130</td><td>38</td><td>5</td></tr>
-</tbody>
+  <thead><tr><th>Rank</th><th>Team</th><th>Score</th><th>Kills</th><th>Placement</th></tr></thead>
+  <tbody id="leaderboard-body">
+    <tr><td colspan="5" style="text-align:center;">Loading...</td></tr>
+  </tbody>
 </table>
 </div>
 </div>
@@ -249,30 +247,151 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 <p>© 2025 F.F.R.I.P. E-Sports. सभी अधिकार सुरक्षित।</p>
 </footer>
 
-<script>
-// Slider
-let slides = document.querySelectorAll('.slide'); let currentSlide=0;
-setInterval(()=>{ slides[currentSlide].classList.remove('active'); currentSlide=(currentSlide+1)%slides.length; slides[currentSlide].classList.add('active'); },5000);
+<script type="module">
+  // --- Step 1: Firebase Imports (Zaroori functions) ---
+  // Note: Hum yahan CDN links use kar rahe hain, jo aapke code mein 'firebase/app' se alag hai, 
+  // lekin yeh browser mein turant kaam karega.
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
-// Countdown
-const countdown=document.getElementById('countdown');
-function updateCountdown(){ const endDate=new Date('Nov 15,2025 18:00:00').getTime(); const now=new Date().getTime(); const distance=endDate-now; if(distance<0){ countdown.innerHTML="Registration Closed"; return; } const days=Math.floor(distance/(1000*60*60*24)); const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60)); const minutes=Math.floor((distance%(1000*60*60))/(1000*60)); countdown.innerHTML=`रजिस्ट्रेशन बंद होने में: <strong>${days}</strong> दिन <strong>${hours}</strong> घंटे <strong>${minutes}</strong> मिनट`; }
-setInterval(updateCountdown,1000);
+  // --- Step 2: Aapka Final Firebase Config ---
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjdnnzqHxLEzbUQhNf71bYtr8t1F9aQnM",
+    authDomain: "ffrip-tournament-2025.firebaseapp.com",
+    databaseURL: "https://ffrip-tournament-2025-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "ffrip-tournament-2025",
+    storageBucket: "ffrip-tournament-2025.firebasestorage.app",
+    messagingSenderId: "1029154653663",
+    appId: "1:1029154653663:web:4f0708c22d29890297b06a"
+  };
 
-// Leaderboard sorting
-window.sortLeaderboard=function(){ const table=document.getElementById('leaderboardTable'); const tbody=table.querySelector('tbody'); let rows=Array.from(tbody.querySelectorAll('tr')); const criteria=document.getElementById('sortCriteria').value;
-rows.sort((a,b)=>parseInt(b.getAttribute(`data-${criteria}`))-parseInt(a.getAttribute(`data-${criteria}`)));
-rows=rows.slice(0,3); rows.forEach((row,i)=>{ row.querySelector('td').textContent=i+1; tbody.appendChild(row); }); }
+  // --- Step 3: Firebase ko Initialize Karein ---
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
 
-// Section heights
-function matchSectionHeights(){ const sections=document.querySelectorAll('.two-column-section'); sections.forEach(sec=>{ const divs=sec.querySelectorAll('> div'); let maxHeight=0; divs.forEach(d=>maxHeight=Math.max(maxHeight,d.offsetHeight)); divs.forEach(d=>d.style.height=maxHeight+'px'); }); }
-window.addEventListener('load',matchSectionHeights); window.addEventListener('resize',matchSectionHeights);
+  // --- Step 4: Live Leaderboard Logic ---
+  let allTeamsData = [];
+  const tableBody = document.getElementById('leaderboard-body');
+  const sortSelect = document.getElementById('sortCriteria');
 
-// UPI copy
-document.getElementById('upi-id-copy').addEventListener('click',()=>{ navigator.clipboard.writeText(document.getElementById('upi-id-copy').textContent).then(()=>{ alert('UPI ID copied!'); }); });
+  // Function jo data ko sort aur table mein dikhayega
+  window.renderLeaderboard = function(sortBy) {
+    if (!sortBy) {
+      sortBy = sortSelect.value || 'score';
+    }
+    
+    // Score/Kills/Placement ke hisaab se sort karein (bada score pehle)
+    const sortedData = [...allTeamsData].sort((a, b) => b[sortBy] - a[sortBy]);
 
-// Hamburger toggle
-function toggleMenu(){ document.querySelector('nav div:not(.nav-hamburger)').classList.toggle('active'); }
+    tableBody.innerHTML = ''; 
+
+    if (sortedData.length === 0) {
+      tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Abhi koi data nahi hai.</td></tr>';
+      return;
+    }
+
+    // Naya data table mein daalein
+    sortedData.forEach((team, index) => {
+      const rank = index + 1;
+      const row = document.createElement('tr');
+      
+      // Top 3 teams ko highlight karein
+      if(rank === 1) row.className = 'rank-1';
+      else if(rank === 2) row.className = 'rank-2';
+      else if(rank === 3) row.className = 'rank-3';
+
+      row.innerHTML = `
+        <td>${rank}</td>
+        <td>${team.name}</td>
+        <td style="font-weight:bold;">${team.score}</td>
+        <td>${team.kills}</td>
+        <td>${team.placement}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  // --- Step 5: Firebase se Live Data Sunein ---
+  const leaderboardRef = ref(database, 'leaderboard'); 
+  
+  // onValue function live data ko sunta hai
+  onValue(leaderboardRef, (snapshot) => {
+    const data = snapshot.val();
+    
+    if (data) {
+      // Firebase se aaye object ko array mein badlein
+      allTeamsData = Object.values(data);
+      // Data milte hi table ko render karein
+      window.renderLeaderboard(sortSelect.value);
+    } else {
+      allTeamsData = [];
+      window.renderLeaderboard(sortSelect.value);
+    }
+  });
+
+  // Sorting control ko jodein
+  sortSelect.addEventListener('change', (e) => {
+    window.renderLeaderboard(e.target.value);
+  });
+
+
+  // --- Aapke Purane JavaScript Functions (Countdown, Slider, etc.) ---
+
+  // Slider
+  let slides = document.querySelectorAll('.slide');
+  let currentSlide = 0;
+  if (slides.length > 0) {
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 5000);
+  }
+
+  // Countdown
+  const countdown = document.getElementById('countdown');
+  function updateCountdown() {
+    const endDate = new Date('Nov 15, 2025 18:00:00').getTime();
+    const now = new Date().getTime();
+    const distance = endDate - now;
+    if (distance < 0) {
+      countdown.innerHTML = "Registration Closed";
+      return;
+    }
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    countdown.innerHTML = `रजिस्ट्रेशन बंद होने में: <strong>${days}</strong> दिन <strong>${hours}</strong> घंटे <strong>${minutes}</strong> मिनट`;
+  }
+  setInterval(updateCountdown, 1000);
+
+  // UPI copy
+  const upiCopyEl = document.getElementById('upi-id-copy');
+  if (upiCopyEl) {
+    upiCopyEl.addEventListener('click', () => {
+      navigator.clipboard.writeText(upiCopyEl.textContent).then(() => {
+        alert('UPI ID copied!');
+      });
+    });
+  }
+  
+  // Hamburger toggle
+  window.toggleMenu = function() {
+    document.querySelector('nav div:not(.nav-hamburger)').classList.toggle('active');
+  }
+
+  // matchSectionHeights (Optional)
+  function matchSectionHeights() { 
+      const sections=document.querySelectorAll('.two-column-section'); 
+      sections.forEach(sec=>{ 
+          const divs=sec.querySelectorAll('> div'); 
+          let maxHeight=0; 
+          divs.forEach(d=>maxHeight=Math.max(maxHeight,d.offsetHeight)); 
+      }); 
+  }
+  window.addEventListener('load',matchSectionHeights); 
+  window.addEventListener('resize',matchSectionHeights);
+
 </script>
 </body>
 </html>
