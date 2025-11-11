@@ -154,8 +154,8 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 <div class="reg-step">
 <i class="fas fa-money-check-alt"></i>
 <div>
-<h3>1. रजिस्ट्रेशन फीस का भुगतान करें (₹100/-)</h3>
-<p style="font-weight:bold; color:var(--accent-color);" id="upi-id-copy-container">UPI ID: <span id="upi-id-copy" style="cursor:pointer; text-decoration:underline;">yourupiid@bank</span> (कॉपी करने के लिए क्लिक करें)</p>
+<h3>1. रजिस्ट्रेशन फीस का भुगतान करें (₹99/-)</h3>
+<p style="font-weight:bold; color:var(--accent-color);" id="upi-id-copy-container">UPI ID: <span id="upi-id-copy" style="cursor:pointer; text-decoration:underline;">ankitkumarbind2222@okaxis</span> (कॉपी करने के लिए क्लिक करें)</p>
 <p>भुगतान के बाद Transaction ID संभाल कर रखें।</p>
 </div>
 </div>
@@ -221,9 +221,9 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 <table>
 <thead><tr><th>Date</th><th>Time</th><th>Match</th></tr></thead>
 <tbody>
-<tr><td>10-Nov-2025</td><td>12:00 PM</td><td>Qualifier Round 1</td></tr>
-<tr><td>11-Nov-2025</td><td>3:00 PM</td><td>Qualifier Round 2</td></tr>
-<tr><td>12-Nov-2025</td><td>6:00 PM</td><td>Semi-Finals</td></tr>
+<tr><td>15-Nov-2025</td><td>6:00 PM</td><td>Qualifier</td></tr>
+
+<tr><td>16-Nov-2025</td><td>6:00 PM</td><td>Finals</td></tr>
 </tbody>
 </table>
 </div>
@@ -246,6 +246,36 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 <footer>
 <p>© 2025 F.F.R.I.P. E-Sports. सभी अधिकार सुरक्षित।</p>
 </footer>
+
+<script>
+async function checkRegistrationLimit() {
+  const apiURL = "https://script.google.com/macros/s/AKfycbzqRx5O3-Le10aw7ro9rrSGG5vqMhWXfA0MBeEECVuoMxchaVEBD7mJh2rkvMQSUvVlSQ/exec"; // 👈 yahan apna /exec URL daalo
+  try {
+    const res = await fetch(apiURL);
+    const data = await res.json();
+
+    if (data.count >= 12) {
+      const upiSection = document.getElementById("upi-id-copy-container");
+      const formBtn = document.querySelector('a[href*="forms.gle"]');
+      if (upiSection) upiSection.style.display = "none";
+      if (formBtn) {
+        formBtn.textContent = "🚫 Registration Full";
+        formBtn.removeAttribute("href");
+        formBtn.style.backgroundColor = "#555";
+        formBtn.style.borderColor = "#555";
+      }
+      const notice = document.createElement("p");
+      notice.innerHTML = "<strong style='color:red;'>Registration Full (12/12)</strong>";
+      document.querySelector("#registration .card").appendChild(notice);
+    }
+  } catch (err) {
+    console.error("Registration check error:", err);
+  }
+}
+checkRegistrationLimit();
+</script>
+
+
 
 <script type="module">
   // --- Step 1: Firebase Imports (Zaroori functions) ---
@@ -348,22 +378,87 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
     }, 5000);
   }
 
-  // Countdown
-  const countdown = document.getElementById('countdown');
-  function updateCountdown() {
-    const endDate = new Date('Nov 15, 2025 18:00:00').getTime();
-    const now = new Date().getTime();
-    const distance = endDate - now;
-    if (distance < 0) {
-      countdown.innerHTML = "Registration Closed";
-      return;
-    }
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    countdown.innerHTML = `रजिस्ट्रेशन बंद होने में: <strong>${days}</strong> दिन <strong>${hours}</strong> घंटे <strong>${minutes}</strong> मिनट`;
-  }
-  setInterval(updateCountdown, 1000);
+ // Countdown Section 
+ 
+const countdown = document.getElementById("countdown");
+const ctaButton = document.querySelector('.cta-button'); // CTA बटन को भी कैप्चर करें
+
+// 1. IST समय प्राप्त करने का फंक्शन (Standard Time Zone Offset)
+function getISTTime() {
+  // वर्तमान UTC समय (milliseconds)
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  // IST ऑफसेट: +5 घंटे 30 मिनट (330 मिनट * 60000 ms/मिनट)
+  const istOffset = 330 * 60000; 
+  return new Date(utc + istOffset);
+}
+
+// 2. काउंटडाउन को अपडेट करने का मुख्य फंक्शन
+function updateCountdown() {
+  // IST में तिथियाँ सेट करें (T19:00:00+05:30 IST को दर्शाता है)
+  const startDate = new Date("2025-11-11T19:00:00+05:30").getTime(); // 11 नवंबर 2025 शाम 7:00 बजे IST
+  const endDate = new Date("2025-11-14T23:59:59+05:30").getTime(); // 14 नवंबर 2025 रात 11:59:59 बजे IST
+  const now = getISTTime().getTime(); // वर्तमान IST समय
+
+  // 🔹 स्थिति 1: रजिस्ट्रेशन शुरू नहीं हुआ (Now < StartDate)
+  if (now < startDate) {
+    const diff = startDate - now;
+    const hrsLeft = Math.floor(diff / (1000 * 60 * 60));
+    const minsLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    
+    countdown.innerHTML = `⏳ रजिस्ट्रेशन <strong>11 नवम्बर शाम 7 बजे</strong> से शुरू होगा (लगभग <strong>${String(hrsLeft).padStart(2,'0')}</strong> घंटे <strong>${String(minsLeft).padStart(2,'0')}</strong> मिनट बाकी)`;
+    
+    // CTA बटन अपडेट: Disabled
+    if (ctaButton) {
+      ctaButton.textContent = "🛡️ 11 नवम्बर शाम 7 बजे शुरू!";
+      ctaButton.style.backgroundColor = "#555";
+      ctaButton.style.borderColor = "#555";
+      ctaButton.style.pointerEvents = "none";
+    }
+    return;
+  }
+
+  // 🔹 स्थिति 3: रजिस्ट्रेशन खत्म हो गया (Now > EndDate)
+  if (now > endDate) {
+    countdown.innerHTML = "🚫 रजिस्ट्रेशन बंद हो चुका है";
+    
+    // CTA बटन अपडेट: Closed
+    if (ctaButton) {
+      ctaButton.textContent = "🚫 रजिस्ट्रेशन बंद";
+      ctaButton.removeAttribute("href");
+      ctaButton.style.backgroundColor = "#990000";
+      ctaButton.style.borderColor = "#FF4444";
+      ctaButton.style.pointerEvents = "none";
+    }
+    return;
+  }
+
+  // 🔹 स्थिति 2: रजिस्ट्रेशन बीच में है (Live Countdown)
+  const distance = endDate - now;
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+  countdown.innerHTML =
+    `रजिस्ट्रेशन बंद होने में: <strong>${String(days).padStart(2,'0')}</strong> दिन <strong>${String(hours).padStart(2,'0')}</strong> घंटे <strong>${String(minutes).padStart(2,'0')}</strong> मिनट`;
+
+  // CTA बटन अपडेट: Active (इसे अपनी डिफ़ॉल्ट सक्रिय स्थिति में रखें)
+  if (ctaButton) {
+    ctaButton.textContent = "🛡️ अभी रजिस्टर करें!";
+    ctaButton.setAttribute("href", "#registration");
+    ctaButton.style.backgroundColor = "var(--accent-color)";
+    ctaButton.style.borderColor = "var(--highlight-color)";
+    ctaButton.style.pointerEvents = "auto";
+  }
+}
+
+// 3. टाइमर को शुरू करें और हर मिनट अपडेट करें
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+
+
+
 
   // UPI copy
   const upiCopyEl = document.getElementById('upi-id-copy');
