@@ -148,13 +148,13 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 
 <!-- Registration -->
 <section id="registration" class="container">
-<h2>📝 टीम रजिस्ट्रेशन (ONLY 99 RUPESS/SQUAD )</h2>
+<h2>📝 टीम रजिस्ट्रेशन (FREE ENTRY)</h2>
 <div class="card" style="text-align:center; border-left:4px solid #FFD700;">
 <p style="font-size:1.2em; font-weight:700; color:var(--highlight-color); margin-bottom:20px;">रजिस्ट्रेशन के लिए इन 3 स्टेप्स को फॉलो करें:</p>
 <div class="reg-step">
 <i class="fas fa-money-check-alt"></i>
 <div>
-<h3>1. रजिस्ट्रेशन फीस का भुगतान करें (₹99/-)</h3>
+<h3>1. रजिस्ट्रेशन फीस का भुगतान करें (Free Entry )</h3>
 <p style="font-weight:bold; color:var(--accent-color);" id="upi-id-copy-container">UPI ID: <span id="upi-id-copy" style="cursor:pointer; text-decoration:underline;">ankitkumarbind2222@okaxis</span> (कॉपी करने के लिए क्लिक करें)</p>
 <p>भुगतान के बाद Transaction ID संभाल कर रखें।</p>
 </div>
@@ -164,7 +164,7 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 <div>
 <h3>2. Google फॉर्म भरें (Transaction ID ज़रूरी)</h3>
 <p>फॉर्म में सभी स्क्वाड डिटेल्स के साथ Transaction ID ज़रूर भरें।</p>
-<a href="https://forms.gle/b5cvZxQNaxaLQDbB6" target="_blank" class="cta-button" style="padding:8px 20px; font-size:1em; margin-top:10px;">🚀 गूगल फॉर्म भरें</a>
+<a href="https://forms.gle/TMWYgVVZQETDvD6h9" target="_blank" class="cta-button" style="padding:8px 20px; font-size:1em; margin-top:10px;">🚀 गूगल फॉर्म भरें</a>
 </div>
 </div>
 <div class="reg-step" style="border-left:4px solid #25D366;">
@@ -182,7 +182,7 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 <div>
 <h2>🏆 पुरस्कार</h2>
 <div class="card">
-<p>🥇 1st Place: ₹500/-<br>🥈 2nd Place: ₹300/-<br>🥉 3rd Place: ₹200/-</p>
+<p>🥇 1st Place: ₹100/-<br>🥈 2nd Place: ₹75/-<br>🥉 3rd Place: ₹200/-</p>
 </div>
 </div>
 <div>
@@ -221,7 +221,7 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 <table>
 <thead><tr><th>Date</th><th>Time</th><th>Match</th></tr></thead>
 <tbody>
-<tr><td>15-Nov-2025</td><td>6:00 PM</td><td>Qualifier</td></tr>
+<tr><td>16-Nov-2025</td><td>6:00 PM</td><td>Qualifier</td></tr>
 
 <tr><td>16-Nov-2025</td><td>6:00 PM</td><td>Finals</td></tr>
 </tbody>
@@ -254,7 +254,7 @@ async function checkRegistrationLimit() {
     const res = await fetch(apiURL);
     const data = await res.json();
 
-    if (data.count >= 12) {
+    if (data.count >= 48) {
       const upiSection = document.getElementById("upi-id-copy-container");
       const formBtn = document.querySelector('a[href*="forms.gle"]');
       if (upiSection) upiSection.style.display = "none";
