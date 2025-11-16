@@ -249,12 +249,12 @@ footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid 
 
 <script>
 async function checkRegistrationLimit() {
-  const apiURL = "https://script.google.com/macros/s/AKfycbzqRx5O3-Le10aw7ro9rrSGG5vqMhWXfA0MBeEECVuoMxchaVEBD7mJh2rkvMQSUvVlSQ/exec"; // 👈 yahan apna /exec URL daalo
+  const apiURL = "https://script.google.com/macros/s/AKfycbyNBxYebctLYQ-JdB4d0Qw0qnkO40Qiw2bAMGr161_DZw5CDkFEIY-NoPaJRVdgm6_V/exec"; // 👈 yahan apna /exec URL daalo
   try {
     const res = await fetch(apiURL);
     const data = await res.json();
 
-    if (data.count >= 48) {
+    if (data.count >=48) {
       const upiSection = document.getElementById("upi-id-copy-container");
       const formBtn = document.querySelector('a[href*="forms.gle"]');
       if (upiSection) upiSection.style.display = "none";
@@ -265,7 +265,7 @@ async function checkRegistrationLimit() {
         formBtn.style.borderColor = "#555";
       }
       const notice = document.createElement("p");
-      notice.innerHTML = "<strong style='color:red;'>Registration Full (12/12)</strong>";
+      notice.innerHTML = "<strong style='color:red;'>Registration Full (48/48)</strong>";
       document.querySelector("#registration .card").appendChild(notice);
     }
   } catch (err) {
@@ -397,7 +397,7 @@ function getISTTime() {
 function updateCountdown() {
   // IST में तिथियाँ सेट करें (T19:00:00+05:30 IST को दर्शाता है)
   const startDate = new Date("2025-11-11T19:00:00+05:30").getTime(); // 11 नवंबर 2025 शाम 7:00 बजे IST
-  const endDate = new Date("2025-11-16T23:59:59+05:30").getTime(); // 14 नवंबर 2025 रात 11:59:59 बजे IST
+  const endDate = new Date("2025-11-15T23:59:59+05:30").getTime(); // 14 नवंबर 2025 रात 11:59:59 बजे IST
   const now = getISTTime().getTime(); // वर्तमान IST समय
 
   // 🔹 स्थिति 1: रजिस्ट्रेशन शुरू नहीं हुआ (Now < StartDate)
