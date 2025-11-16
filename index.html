@@ -1,492 +1,1263 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔵 F.F.R.I.P. E-Sports 2025 🏆</title>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-:root {
-    --dark-bg: #141D2B;
-    --card-bg: #1F2A38;
-    --accent-color: #00BFFF;
-    --highlight-color: #00FFFF;
-    --text-light: #E0E6F0;
-    --text-dark: #FFFFFF;
-    --font-main: 'Exo 2', sans-serif;
-    --font-heading: 'Orbitron', sans-serif;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔵 F.F.R.I.P. E-Sports 2025 🏆</title>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --dark-bg: #141D2B;
+            --card-bg: #1F2A38;
+            --accent-color: #00BFFF;
+            --highlight-color: #00FFFF;
+            --text-light: #E0E6F0;
+            --text-dark: #FFFFFF;
+            --font-main: 'Exo 2', sans-serif;
+            --font-heading: 'Orbitron', sans-serif;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-main);
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            scroll-behavior: smooth;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: linear-gradient(to right, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 30s linear infinite;
+            opacity: 0.2;
+        }
+
+        @keyframes moveGrid {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 50px 50px;
+            }
+        }
+
+        header {
+            background-color: rgba(20, 29, 43, 0.95);
+            padding: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            border-bottom: 3px solid var(--accent-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav h3 {
+            font-family: var(--font-heading);
+            font-size: 1.6em;
+            color: var(--highlight-color);
+            margin: 0;
+            padding: 5px 0;
+            white-space: nowrap;
+        }
+
+        nav div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            margin-top: 5px;
+        }
+
+        nav a {
+            color: var(--text-light) !important;
+            text-decoration: none !important;
+            padding: 8px 12px;
+            margin: 3px 5px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            border: 1px solid transparent;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-bg) !important;
+            box-shadow: 0 0 10px var(--highlight-color);
+            border-color: var(--highlight-color);
+        }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8em;
+            color: var(--highlight-color);
+        }
+
+        @media (max-width: 768px) {
+            nav div:not(.nav-hamburger) {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            nav div:not(.nav-hamburger).active {
+                display: flex;
+            }
+
+            .nav-hamburger {
+                display: block;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            color: var(--text-dark);
+            text-shadow: 0 0 20px var(--highlight-color), 0 0 40px rgba(0, 191, 255, 0.5);
+            margin-bottom: 10px;
+            font-family: var(--font-heading);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--text-light);
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .timer {
+            margin-top: 20px;
+            font-size: 1.8em;
+            padding: 10px 30px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--highlight-color);
+            color: var(--highlight-color);
+        }
+
+        .timer strong {
+            color: var(--text-dark);
+        }
+
+        .slider-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            filter: brightness(0.7);
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-dark) !important;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 40px;
+            font-size: 1.3em;
+            font-weight: 900;
+            margin: 15px;
+            box-shadow: 0 0 15px var(--highlight-color);
+            transition: all 0.4s ease;
+            border: 2px solid var(--highlight-color);
+        }
+
+        .cta-button:hover {
+            background-color: var(--highlight-color);
+            color: var(--dark-bg) !important;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--highlight-color);
+        }
+
+        /* Sections */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 10px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: var(--highlight-color);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            margin: 15px 0;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 1);
+        }
+
+        .two-column-section {
+            display: flex;
+            gap: 50px;
+            align-items: stretch;
+            margin-top: 20px;
+        }
+
+        .two-column-section>div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .two-column-section>div .card {
+            flex: 1;
+        }
+
+        .stream-card iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+        }
+
+        /* Registration */
+        .reg-step {
+            background-color: #283747;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--accent-color);
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+
+        .reg-step i {
+            font-size: 2em;
+            color: var(--highlight-color);
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .reg-step h3 {
+            margin: 0;
+            font-size: 1.1em;
+            color: var(--text-dark);
+            font-family: var(--font-main);
+            text-transform: none;
+        }
+
+        .reg-step p {
+            margin: 5px 0 0 0;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        /* Leaderboard */
+        .leaderboard-controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .leaderboard-controls label {
+            margin-right: 10px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .leaderboard-controls select {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-color);
+            background-color: var(--card-bg);
+            color: var(--text-light);
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%2300FFFF" d="M6 9l-4-4h8z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            padding-right: 25px;
+            cursor: pointer;
+        }
+        
+        /* ⭐ Leaderboard CSS Fixes ⭐ */
+        
+        /* 1. हॉरिजॉन्टल और वर्टिकल स्क्रोलिंग कंटेनर */
+        .responsive-table-wrapper {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 10px;
+        }
+
+        .leaderboard-scroll {
+            max-height: 180px !important; /* V-Scroll हाइट (3-4 टीमें) */
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            display: block !important;
+        }
+
+        /* 2. टेबल चौड़ाई (H-Scroll को सक्रिय करने के लिए) */
+        .leaderboard table, #schedule table {
+            width: 100%;
+            min-width: 700px !important; /* H-Scroll के लिए फिक्स चौड़ाई */
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        /* 3. सामान्य सेल और रो स्टाइलिंग (कम स्पेसिंग) */
+        .leaderboard th, .leaderboard td, #schedule th, #schedule td {
+            padding: 6px 5px !important; /* Row गैप फिक्स */
+            text-align: center;
+            border-bottom: 1px solid #333;
+            color: var(--text-light);
+            line-height: 1.2; /* टेक्स्ट रैपिंग को नियंत्रित करने के लिए */
+        }
+        
+        /* 4. रैंक और टीम कॉलम की चौड़ाई फिक्स करें */
+        .leaderboard th:nth-child(1),
+        .leaderboard td:nth-child(1) {
+            width: 60px !important;
+            min-width: 60px !important;
+        }
+
+        .leaderboard th:nth-child(2),
+        .leaderboard td:nth-child(2) {
+            width: 120px !important;
+            min-width: 120px !important;
+        }
+
+        /* 5. स्टिकी हेडर और रैंकिंग कलर */
+        #leaderboardTable th, .leaderboard th, #schedule thead th {
+            background: rgba(0, 191, 255, 0.15);
+            color: var(--highlight-color);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        .leaderboard tr:hover, #schedule tbody tr:hover {
+            background-color: #314256;
+        }
+
+        .leaderboard tr.rank-1 {
+            background-color: rgba(0, 255, 255, 0.2);
+            border-left: 5px solid var(--highlight-color);
+            color: var(--highlight-color);
+            font-weight: bold;
+        }
+
+        .leaderboard tr.rank-2 {
+            background-color: rgba(100, 149, 237, 0.2);
+            border-left: 5px solid #6495ED;
+            color: #6495ED;
+        }
+
+        .leaderboard tr.rank-3 {
+            background-color: rgba(173, 216, 230, 0.2);
+            border-left: 5px solid #ADD8E6;
+            color: #ADD8E6;
+        }
+
+        /* Schedule */
+        #schedule table {
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #schedule thead th {
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            font-weight: 900;
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            padding: 20px 0;
+            border-top: 3px solid var(--accent-color);
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        /* Responsive */
+        @media (max-width:992px) {
+            .hero h1 {
+                font-size: 3.5em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            .cta-button {
+                font-size: 1.2em;
+                padding: 15px 30px;
+            }
+
+            .timer {
+                font-size: 1.5em;
+                padding: 10px 20px;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            nav a {
+                padding: 8px 10px;
+                margin: 3px;
+            }
+        }
+
+        @media (max-width:768px) {
+            .hero {
+                height: 40vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+                line-height: 1.1;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .timer {
+                font-size: 1.2em;
+            }
+
+            .two-column-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .two-column-section>div .card {
+                height: auto;
+            }
+            
+            /* Leaderboard के लिए मुख्य फिक्स */
+.responsive-table-wrapper { 
+    overflow-x: auto !important; /* सुनिश्चित करें कि यह हमेशा लागू हो */
+    -webkit-overflow-scrolling: touch; 
+    padding-bottom: 10px;
 }
-html, body { overflow-x: hidden; margin:0; padding:0; font-family: var(--font-main); background-color: var(--dark-bg); color: var(--text-light); scroll-behavior: smooth; }
-.grid-overlay { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:-1;
-    background-image: linear-gradient(to right, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
-                     linear-gradient(to bottom, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px; animation: moveGrid 30s linear infinite; opacity:0.2; }
-@keyframes moveGrid { from { background-position:0 0; } to { background-position:50px 50px; } }
 
-header { background-color: rgba(20,29,43,0.95); padding: 10px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.7); border-bottom:3px solid var(--accent-color); position: fixed; top:0; left:0; width:100%; z-index:999; }
-nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-nav h3 { font-family: var(--font-heading); font-size: 1.6em; color: var(--highlight-color); margin:0; padding:5px 0; white-space: nowrap; }
-nav div { display: flex; flex-wrap: wrap; justify-content: flex-end; margin-top:5px; }
-nav a { color: var(--text-light) !important; text-decoration: none !important; padding: 8px 12px; margin: 3px 5px; border-radius:6px; transition: all 0.3s ease; font-weight:700; border:1px solid transparent; font-size:0.9em; white-space: nowrap; }
-nav a:hover { background-color: var(--accent-color); color: var(--dark-bg) !important; box-shadow: 0 0 10px var(--highlight-color); border-color: var(--highlight-color); }
+/*... बाक़ी CSS ...*/
 
-/* Hamburger */
-.nav-hamburger { display: none; cursor:pointer; font-size:1.8em; color: var(--highlight-color); }
-@media (max-width: 768px){
-    nav div:not(.nav-hamburger) { display: none; flex-direction: column; width:100%; margin-top:10px; }
-    nav div:not(.nav-hamburger).active { display: flex; }
-    .nav-hamburger { display: block; }
-}
-
-/* Hero */
-.hero { height:50vh; display:flex; justify-content:center; align-items:center; text-align:center; position: relative; margin-top:60px; }
-.hero-content { z-index:10; padding:0 20px; }
-.hero h1 { font-size:4em; color: var(--text-dark); text-shadow:0 0 20px var(--highlight-color),0 0 40px rgba(0,191,255,0.5); margin-bottom:10px; font-family: var(--font-heading); }
-.hero p { font-size:1.5em; font-weight:700; color: var(--text-light); text-shadow:1px 1px 3px #000; }
-.timer { margin-top:20px; font-size:1.8em; padding:10px 30px; border-radius:8px; background-color: rgba(0,0,0,0.5); border:1px solid var(--highlight-color); color: var(--highlight-color); }
-.timer strong { color: var(--text-dark); }
-.slider-container { position:absolute; top:0; left:0; right:0; bottom:0; overflow:hidden; z-index:1; }
-.slide { width:100%; height:100%; position:absolute; background-size:cover; background-position:center; opacity:0; transition:opacity 1s ease-in-out; filter:brightness(0.7); }
-.slide.active { opacity:1; }
-.hero::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:5; }
-.cta-button { display:inline-block; background-color: var(--accent-color); color: var(--text-dark) !important; padding:15px 40px; text-decoration:none; border-radius:40px; font-size:1.3em; font-weight:900; margin:15px; box-shadow:0 0 15px var(--highlight-color); transition: all 0.4s ease; border:2px solid var(--highlight-color); }
-.cta-button:hover { background-color: var(--highlight-color); color: var(--dark-bg) !important; transform: scale(1.05); box-shadow: 0 0 30px var(--highlight-color); }
-
-/* Sections */
-.container { width:90%; max-width:1200px; margin:auto; padding:10px 0; position: relative; z-index:10; }
-h2 { font-family: var(--font-heading); font-size:2.2em; margin-bottom:20px; color: var(--highlight-color); text-shadow:0 0 10px rgba(0,255,255,0.6); position: relative; padding-bottom:10px; text-align:center; }
-h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width:60px; height:3px; background-color: var(--accent-color); border-radius:2px; }
-.card { background-color: var(--card-bg); padding:25px; margin:15px 0; border-radius:12px; border-left:4px solid var(--accent-color); box-shadow:0 5px 20px rgba(0,0,0,0.8); transition: transform 0.3s, box-shadow 0.3s; height:100%; display:flex; flex-direction:column; }
-.card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,1); }
-.two-column-section { display:flex; gap:50px; align-items: stretch; margin-top:20px; }
-.two-column-section > div { flex:1; display:flex; flex-direction:column; }
-.two-column-section > div .card { flex:1; }
-.stream-card iframe { width:100%; aspect-ratio:16/9; border-radius:8px; }
-
-/* Registration */
-.reg-step { background-color:#283747; padding:15px; border-radius:8px; margin-bottom:15px; border:1px solid var(--accent-color); text-align:left; display:flex; align-items:center; }
-.reg-step i { font-size:2em; color: var(--highlight-color); margin-right:15px; width:40px; text-align:center; }
-.reg-step h3 { margin:0; font-size:1.1em; color: var(--text-dark); font-family: var(--font-main); text-transform:none; }
-.reg-step p { margin:5px 0 0 0; font-size:0.9em; color:#ccc; }
-
-/* Leaderboard */
-.leaderboard-controls { display:flex; justify-content:flex-end; align-items:center; margin-bottom:15px; font-size:1em; }
-.leaderboard-controls label { margin-right:10px; font-weight:700; color: var(--accent-color); }
-.leaderboard-controls select { padding:8px; border-radius:6px; border:1px solid var(--accent-color); background-color: var(--card-bg); color: var(--text-light); appearance:none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%2300FFFF" d="M6 9l-4-4h8z"/></svg>'); background-repeat:no-repeat; background-position:right 8px center; padding-right:25px; cursor:pointer; }
-.responsive-table-wrapper { overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:10px; }
-.leaderboard table, #schedule table { width:100%; min-width:450px; border-collapse: collapse; margin-top:15px; }
-.leaderboard th, .leaderboard td, #schedule th, #schedule td { padding:10px 12px; text-align:left; border-bottom:1px solid #333; }
-.leaderboard th, #schedule thead th { background-color: rgba(0,191,255,0.15); color: var(--highlight-color); font-size:0.9em; letter-spacing:1px; }
-.leaderboard tr:nth-child(even), #schedule tbody tr:nth-child(even) { background-color:#253342; }
-.leaderboard tr:hover, #schedule tbody tr:hover { background-color:#314256; }
-.leaderboard tr.rank-1 { background-color: rgba(0,255,255,0.2); border-left:5px solid var(--highlight-color); color: var(--highlight-color); font-weight:bold;}
-.leaderboard tr.rank-2 { background-color: rgba(100,149,237,0.2); border-left:5px solid #6495ED; color:#6495ED;}
-.leaderboard tr.rank-3 { background-color: rgba(173,216,230,0.2); border-left:5px solid #ADD8E6; color:#ADD8E6;}
-#schedule table { border-collapse: separate; border-spacing:0; border-radius:8px; overflow:hidden; }
-#schedule thead th { background-color: var(--accent-color); color: var(--dark-bg); font-weight:900; }
-
-footer { background-color: var(--card-bg); padding:20px 0; border-top:3px solid var(--accent-color); text-align:center; font-size:0.9em; }
-
-/* Responsive */
-@media (max-width:992px){ .hero h1{ font-size:3.5em; } .hero p{ font-size:1.2em; } .cta-button{ font-size:1.2em; padding:15px 30px; } .timer{ font-size:1.5em; padding:10px 20px; } h2{ font-size:2em; } nav a{ padding:8px 10px; margin:3px; } }
-@media (max-width:768px){
-    .hero{ height:40vh; }
-    .hero h1{ font-size:2.5em; line-height:1.1; }
-    .hero p{ font-size:1em; }
-    .timer{ font-size:1.2em; }
-    .two-column-section{ flex-direction:column; gap:20px; }
+@media (max-width:768px){    
+    .hero{ height:40vh; }    
+    .hero h1{ font-size:2.5em; line-height:1.1; }    
+    .hero p{ font-size:1em; }    
+    .timer{ font-size:1.2em; }    
+    .two-column-section{ flex-direction:column; gap:20px; }    
     .two-column-section > div .card{ height:auto; }
-    .leaderboard th, .leaderboard td, #schedule th, #schedule td{ font-size:0.85em; padding:8px 6px; }
+    
+    /* ⭐ फिक्स: हॉरिजॉन्टल स्क्रॉलिंग को सुनिश्चित करें ⭐ */
+    .responsive-table-wrapper {
+        overflow-x: auto !important;
+        width: 100%; /* यह सुनिश्चित करता है कि कंटेनर डिवाइस की पूरी चौड़ाई ले */
+    }
+    
+    /* ⭐ मोबाइल फिक्स: Row की ऊँचाई और कॉलम चौड़ाई ⭐ */
+    .leaderboard th, .leaderboard td, #schedule th, #schedule td {
+        font-size: 0.85em;
+        padding: 6px 5px !important; 
+    }
+
+    /* रैंक और टीम की चौड़ाई को और कम करें */
+    .leaderboard th:nth-child(1),
+    .leaderboard td:nth-child(1) {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
+
+    .leaderboard th:nth-child(2),
+    .leaderboard td:nth-child(2) {
+        width: 80px !important;
+        min-width: 80px !important;
+    }
 }
-@media(max-width:480px){
-    .container{ width:95%; }
-    .hero{ height:32vh; }
-    .hero h1{ font-size:1.6em; letter-spacing:1px; }
-    .hero p{ font-size:0.8em; margin-bottom:5px; }
-    .cta-button{ font-size:0.9em; padding:8px 15px; margin:8px; }
-    h2{ font-size:1.6em; }
-    .timer{ font-size:0.9em; padding:6px 10px; }
-    nav h3{ font-size:1.3em; }
-    nav a{ font-size:0.8em; padding:4px 10px; }
-    .reg-step h3{ font-size:1em; }
-    .reg-step p{ font-size:0.8em; }
+        }
+
+        @media(max-width:480px) {
+            .container {
+                width: 95%;
+            }
+
+            .hero {
+                height: 32vh;
+            }
+
+            .hero h1 {
+                font-size: 1.6em;
+                letter-spacing: 1px;
+            }
+
+            .hero p {
+                font-size: 0.8em;
+                margin-bottom: 5px;
+            }
+
+            .cta-button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+                margin: 8px;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .timer {
+                font-size: 0.9em;
+                padding: 6px 10px;
+            }
+
+            nav h3 {
+                font-size: 1.3em;
+            }
+
+            nav a {
+                font-size: 0.8em;
+                padding: 4px 10px;
+            }
+
+            .reg-step h3 {
+                font-size: 1em;
+            }
+
+            .reg-step p {
+                font-size: 0.8em;
+            }
+        }
+
+
+
+        /* ============================= */
+/* ⭐ FINAL WINNER SECTION CSS   */
+/* ============================= */
+
+.winner-section {
+  padding: 40px 0;
+  text-align: center;
 }
-</style>
+
+.winner-title {
+  font-size: 28px;
+  color: #00eaff;
+  text-shadow: 0 0 12px #00eaffaa;
+  margin-bottom: 25px;
+}
+
+/* Winner card wrapper */
+.winner-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+/* Winner Card */
+.winner-card {
+  width: 220px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 18px #00eaff50;
+  transition: 0.4s ease;
+  text-align: center;
+}
+
+.winner-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 32px #00eaffaa;
+}
+
+/* Neon Ring Photo */
+.winner-ring {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+  border: 4px solid #00eaff;
+  box-shadow: 0 0 25px #00eaff, inset 0 0 10px #003f47;
+  animation: neonPulse 2s infinite ease-in-out;
+}
+
+.winner-ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Neon Pulse */
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 15px #00eaff; }
+  50% { box-shadow: 0 0 35px #00eaff; }
+  100% { box-shadow: 0 0 15px #00eaff; }
+}
+
+/* Text */
+.winner-card h3 {
+  color: white;
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.winner-card p {
+  color: #00eaff;
+  margin: 6px 0;
+  font-size: 18px;
+}
+
+.winner-card span {
+  display: block;
+  color: #ffd700;
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+/* GOLDS / SILVER / BRONZE GLOW */
+.gold { box-shadow: 0 0 20px #ffd70055 !important; }
+.gold:hover { box-shadow: 0 0 35px #ffd700aa !important; }
+
+.silver { box-shadow: 0 0 20px #c0c0c055 !important; }
+.silver:hover { box-shadow: 0 0 35px #c0c0c0aa !important; }
+
+.bronze { box-shadow: 0 0 20px #cd7f3255 !important; }
+.bronze:hover { box-shadow: 0 0 35px #cd7f32aa !important; }
+
+.winner-note {
+  margin-top: 20px;
+  color: #8affff;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+    </style>
 </head>
 <body>
-<div class="grid-overlay"></div>
-<header>
-<div class="container">
-<nav>
-<h3>F.F.R.I.P. E-Sports</h3>
-<div class="nav-hamburger" onclick="toggleMenu()">&#9776;</div>
-<div>
-<a href="#home"><i class="fas fa-home"></i> होम</a>
-<a href="#registration"><i class="fas fa-edit"></i> रजिस्ट्रेशन</a>
-<a href="#combined-info"><i class="fas fa-trophy"></i> पुरस्कार / Leaderboard / Stream</a>
-<a href="#schedule-rules"><i class="fas fa-calendar-alt"></i> शेड्यूल / नियम</a>
-</div>
-</nav>
-</div>
-</header>
+    <div class="grid-overlay"></div>
+    <header>
+        <div class="container">
+            <nav>
+                <h3>F.F.R.I.P. E-Sports</h3>
+                <div class="nav-hamburger" onclick="toggleMenu()">&#9776;</div>
+                <div>
+                    <a href="#home"><i class="fas fa-home"></i> होम</a>
+                    <a href="#registration"><i class="fas fa-edit"></i> रजिस्ट्रेशन</a>
+                    <a href="#combined-info"><i class="fas fa-trophy"></i> पुरस्कार / Leaderboard / Stream</a>
+                    <a href="#schedule-rules"><i class="fas fa-calendar-alt"></i> शेड्यूल / नियम</a>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-<!-- Hero Section -->
-<section class="hero" id="home">
-<div class="slider-container">
-<div class="slide active" style="background-image: url('https://placehold.co/1200x600/003366/00BFFF?text=F.F.R.I.P.%20Arena');"></div>
-<div class="slide" style="background-image: url('https://placehold.co/1200x600/004080/00FFFF?text=Squad%20Up');"></div>
-<div class="slide" style="background-image: url('https://placehold.co/1200x600/0055AA/FFFFFF?text=50K%20Prize');"></div>
-</div>
-<div class="hero-content">
-<h1>🔵 F.F.R.I.P. CHAMPIONSHIP 2025 🏆</h1>
-<p>कुल ₹1000/- का प्राइज पूल। अपना स्क्वाड तैयार करें!</p>
-<a href="#registration" class="cta-button">🛡️ अभी रजिस्टर करें!</a>
-<div class="timer" id="countdown">रजिस्ट्रेशन बंद होने में: **05** दिन **12** घंटे **30** मिनट</div> 
-</div>
+    <section class="hero" id="home">
+        <div class="slider-container">
+            <div class="slide active" style="background-image: url('https://placehold.co/1200x600/003366/00BFFF?text=F.F.R.I.P.%20Arena');"></div>
+            <div class="slide" style="background-image: url('https://placehold.co/1200x600/004080/00FFFF?text=Squad%20Up');"></div>
+            <div class="slide" style="background-image: url('https://placehold.co/1200x600/0055AA/FFFFFF?text=50K%20Prize');"></div>
+        </div>
+        <div class="hero-content">
+            <h1>🔵 F.F.R.I.P. CHAMPIONSHIP 2025 🏆</h1>
+            <p>कुल ₹1000/- का प्राइज पूल। अपना स्क्वाड तैयार करें!</p>
+            <a href="#registration" class="cta-button">🛡️ अभी रजिस्टर करें!</a>
+            <div class="timer" id="countdown">रजिस्ट्रेशन बंद होने में: **05** दिन **12** घंटे **30** मिनट</div>
+        </div>
+    </section>
+
+    <section id="registration" class="container">
+        <h2>📝 टीम रजिस्ट्रेशन (FREE ENTRY)</h2>
+        <div class="card" style="text-align:center; border-left:4px solid #FFD700;">
+            <p style="font-size:1.2em; font-weight:700; color:var(--highlight-color); margin-bottom:20px;">रजिस्ट्रेशन के लिए इन 3 स्टेप्स को फॉलो करें:</p>
+            <div class="reg-step">
+                <i class="fas fa-money-check-alt"></i>
+                <div>
+                    <h3>1. रजिस्ट्रेशन फीस का भुगतान करें (Free Entry )</h3>
+                    <p style="font-weight:bold; color:var(--accent-color);" id="upi-id-copy-container">UPI ID: <span id="upi-id-copy" style="cursor:pointer; text-decoration:underline;">ankitkumarbind2222@okaxis</span> (कॉपी करने के लिए क्लिक करें)</p>
+                    <p>भुगतान के बाद Transaction ID संभाल कर रखें।</p>
+                </div>
+            </div>
+            <div class="reg-step">
+                <i class="fas fa-file-alt"></i>
+                <div>
+                    <h3>2. Google फॉर्म भरें (Transaction ID ज़रूरी)</h3>
+                    <p>फॉर्म में सभी स्क्वाड डिटेल्स के साथ Transaction ID ज़रूर भरें।</p>
+                    <a href="https://forms.gle/TMWYgVVZQETDvD6h9" target="_blank" class="cta-button" style="padding:8px 20px; font-size:1em; margin-top:10px;">🚀 गूगल फॉर्म भरें</a>
+                </div>
+            </div>
+            <div class="reg-step" style="border-left:4px solid #25D366;">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                    <h3>3. WhatsApp ग्रुप जॉइन करें</h3>
+                    <a href="https://chat.whatsapp.com/Gxve7efJHo2F95MDlzTyGG?mode=wwt" target="_blank" class="cta-button" style="background-color:#25D366; border-color:#25D366; color:#fff;">💬 WhatsApp जॉइन करें</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="combined-info" class="container two-column-section">
+        <div>
+            <h2>🏆 पुरस्कार</h2>
+            <div class="card">
+                <p>🥇 1st Place: ₹150/-<br>🥈 2nd Place: ₹75/-<br>🥉 3rd Place: ₹50/-</p>
+            </div>
+        </div>
+        
+        <div>
+            <h2>📊 Leaderboard</h2>
+            <div class="card leaderboard">
+                <div class="leaderboard-controls" style="margin-bottom:15px;">
+                    <label>Select Match:</label>
+                    <select id="matchSelect">
+                        <option value="match1">Match 1</option>
+                        <option value="match2">Match 2</option>
+                        <option value="match3">Match 3</option>
+                        <option value="final">Final Leaderboard</option>
+                    </select>
+                </div>
+
+                <div class="leaderboard-controls">
+                    <label for="sortCriteria">Sort By:</label>
+                    <select id="sortCriteria">
+                        <option value="score">Score</option>
+                        <option value="kills">Kills</option>
+                        <option value="placement">Placement</option>
+                    </select>
+                </div>
+
+                <div class="responsive-table-wrapper leaderboard-scroll">
+                    <table id="leaderboardTable">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Players</th>
+                                <th>Score</th>
+                                <th>Kills</th>
+                                <th>Placement</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-body">
+                            <tr>
+                                <td colspan="5" style="text-align:center;">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>📺 लाइव स्ट्रीम</h2>
+            <div class="card stream-card">
+                <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" title="Live Stream" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================= -->
+<!-- 🏆 FINAL WINNERS SECTION      -->
+<!-- ============================= -->
+
+<!-- ============================= -->
+<!-- 🏆 FINAL WINNERS SECTION (Upgraded) -->
+<!-- ============================= -->
+
+<section id="final-winners" class="winner-section container">
+
+    <h2 class="winner-title">
+        🏆 FINAL WINNERS – F.F.R.I.P Championship 2025
+    </h2>
+
+    <div class="winner-wrapper">
+
+        <!-- 🥇 FIRST PLACE -->
+        <div class="winner-card gold" id="winner1">
+            <div class="winner-ring">
+                <img id="winner1-img" src="https://photosly.in/wp-content/uploads/2024/07/boy-dp-pic1.jpg" alt="Winner 1">
+            </div>
+            <h3>🥇 1st Place</h3>
+            <p id="winner1-name">PLAYER ABC</p>
+            <span id="winner1-prize">₹150/-</span>
+        </div>
+
+        <!-- 🥈 SECOND PLACE -->
+        <div class="winner-card silver" id="winner2">
+            <div class="winner-ring">
+                <img id="winner2-img" src="https://qph.cf2.quoracdn.net/main-qimg-cce0696b2bb62ddc15c561bd7adc93b1-lq" alt="Winner 2">
+            </div>
+            <h3>🥈 2nd Place</h3>
+            <p id="winner2-name">PLAYER XYZ</p>
+            <span id="winner2-prize">₹75/-</span>
+        </div>
+
+        <!-- 🥉 THIRD PLACE -->
+        <div class="winner-card bronze" id="winner3">
+            <div class="winner-ring">
+                <img id="winner3-img" src="https://thepicturesdp.in/wp-content/uploads/2025/08/mysterious-boys-wallpaper.jpg" alt="Winner 3">
+            </div>
+            <h3>🥉 3rd Place</h3>
+            <p id="winner3-name">PLAYER PQR</p>
+            <span id="winner3-prize">₹50/-</span>
+        </div>
+
+    </div>
+
+    <p class="winner-note">
+        ⭐ Tournament Results अंतिम match के बाद Firebase से auto-update हो जाएंगे।
+    </p>
+
 </section>
 
-<!-- Registration -->
-<section id="registration" class="container">
-<h2>📝 टीम रजिस्ट्रेशन (FREE ENTRY)</h2>
-<div class="card" style="text-align:center; border-left:4px solid #FFD700;">
-<p style="font-size:1.2em; font-weight:700; color:var(--highlight-color); margin-bottom:20px;">रजिस्ट्रेशन के लिए इन 3 स्टेप्स को फॉलो करें:</p>
-<div class="reg-step">
-<i class="fas fa-money-check-alt"></i>
-<div>
-<h3>1. रजिस्ट्रेशन फीस का भुगतान करें (Free Entry )</h3>
-<p style="font-weight:bold; color:var(--accent-color);" id="upi-id-copy-container">UPI ID: <span id="upi-id-copy" style="cursor:pointer; text-decoration:underline;">ankitkumarbind2222@okaxis</span> (कॉपी करने के लिए क्लिक करें)</p>
-<p>भुगतान के बाद Transaction ID संभाल कर रखें।</p>
-</div>
-</div>
-<div class="reg-step">
-<i class="fas fa-file-alt"></i>
-<div>
-<h3>2. Google फॉर्म भरें (Transaction ID ज़रूरी)</h3>
-<p>फॉर्म में सभी स्क्वाड डिटेल्स के साथ Transaction ID ज़रूर भरें।</p>
-<a href="https://forms.gle/TMWYgVVZQETDvD6h9" target="_blank" class="cta-button" style="padding:8px 20px; font-size:1em; margin-top:10px;">🚀 गूगल फॉर्म भरें</a>
-</div>
-</div>
-<div class="reg-step" style="border-left:4px solid #25D366;">
-<i class="fab fa-whatsapp"></i>
-<div>
-<h3>3. WhatsApp ग्रुप जॉइन करें</h3>
-<a href="https://chat.whatsapp.com/Gxve7efJHo2F95MDlzTyGG?mode=wwt" target="_blank" class="cta-button" style="background-color:#25D366; border-color:#25D366; color:#fff;">💬 WhatsApp जॉइन करें</a>
-</div>
-</div>
-</div>
-</section>
+    <section id="schedule-rules" class="container">
+        <h2>🗓️ मैच शेड्यूल</h2>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Match</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>16-Nov-2025</td>
+                        <td>6:00 PM</td>
+                        <td>Qualifier</td>
+                    </tr>
+                    <tr>
+                        <td>16-Nov-2025</td>
+                        <td>6:00 PM</td>
+                        <td>Finals</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-<!-- Prizes / Leaderboard / Stream -->
-<section id="combined-info" class="container two-column-section">
-<div>
-<h2>🏆 पुरस्कार</h2>
-<div class="card">
-<p>🥇 1st Place: ₹100/-<br>🥈 2nd Place: ₹75/-<br>🥉 3rd Place: ₹50/-</p>
-</div>
-</div>
-<div>
-<h2>📊 Leaderboard</h2>
-<div class="card leaderboard">
-<div class="leaderboard-controls">
-<label for="sortCriteria">Sort By:</label>
-<select id="sortCriteria" onchange="sortLeaderboard()">
-<option value="score">Score</option>
-<option value="kills">Kills</option>
-<option value="placement">Placement</option>
-</select>
-</div>
-<div class="responsive-table-wrapper">
-<table id="leaderboardTable">
-  <thead><tr><th>Rank</th><th>Team</th><th>Score</th><th>Kills</th><th>Placement</th></tr></thead>
-  <tbody id="leaderboard-body">
-    <tr><td colspan="5" style="text-align:center;">Loading...</td></tr>
-  </tbody>
-</table>
-</div>
-</div>
-</div>
-<div>
-<h2>📺 लाइव स्ट्रीम</h2>
-<div class="card stream-card">
-<iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" title="Live Stream" allowfullscreen></iframe>
-</div>
-</div>
-</section>
+        <h2>📜 नियम और संपर्क</h2>
+        <div class="card">
+            <h3 style="color: var(--accent-color); text-align:left; margin-top:0;">मुख्य नियम</h3>
+            <ul style="list-style-type: disc; margin-left:20px; padding-left:0;">
+                <li>सभी खिलाड़ियों को WhatsApp ग्रुप में होना ज़रूरी है।</li>
+                <li>रूम ID और पासवर्ड मैच से 15 मिनट पहले शेयर किए जाएंगे।</li>
+                <li>किसी भी प्रकार का हैकिंग या अनैतिक व्यवहार तुरंत अयोग्य घोषित कर दिया जाएगा।</li>
+                <li>प्राइज पूल के भुगतान के लिए सही UPI ID देना अनिवार्य है।</li>
+            </ul>
+            <h3 style="color: var(--accent-color); text-align:left; margin-top:20px;">संपर्क करें</h3>
+            <p>किसी भी प्रश्न या तकनीकी सहायता के लिए, कृपया हमारे <a href="[Discord Link]" style="color: var(--highlight-color); text-decoration:none; font-weight:bold;">डिस्कोर्ड सर्वर</a> से जुड़ें।</p>
+            <p>ईमेल: zzmtg1729@gmail.com</p>
+        </div>
+    </section>
 
-<!-- Schedule -->
-<section id="schedule-rules" class="container">
-<h2>🗓️ मैच शेड्यूल</h2>
-<div class="card">
-<table>
-<thead><tr><th>Date</th><th>Time</th><th>Match</th></tr></thead>
-<tbody>
-<tr><td>16-Nov-2025</td><td>6:00 PM</td><td>Qualifier</td></tr>
-
-<tr><td>16-Nov-2025</td><td>6:00 PM</td><td>Finals</td></tr>
-</tbody>
-</table>
-</div>
-
-<h2>📜 नियम और संपर्क</h2>
-<div class="card">
-<h3 style="color: var(--accent-color); text-align:left; margin-top:0;">मुख्य नियम</h3>
-<ul style="list-style-type: disc; margin-left:20px; padding-left:0;">
-<li>सभी खिलाड़ियों को WhatsApp ग्रुप में होना ज़रूरी है।</li>
-<li>रूम ID और पासवर्ड मैच से 15 मिनट पहले शेयर किए जाएंगे।</li>
-<li>किसी भी प्रकार का हैकिंग या अनैतिक व्यवहार तुरंत अयोग्य घोषित कर दिया जाएगा।</li>
-<li>प्राइज पूल के भुगतान के लिए सही UPI ID देना अनिवार्य है।</li>
-</ul>
-<h3 style="color: var(--accent-color); text-align:left; margin-top:20px;">संपर्क करें</h3>
-<p>किसी भी प्रश्न या तकनीकी सहायता के लिए, कृपया हमारे <a href="[Discord Link]" style="color: var(--highlight-color); text-decoration:none; font-weight:bold;">डिस्कोर्ड सर्वर</a> से जुड़ें।</p>
-<p>ईमेल: zzmtg1729@gmail.com</p>
-</div>
-</section>
-
-<footer>
-<p>© 2025 F.F.R.I.P. E-Sports. सभी अधिकार सुरक्षित।</p>
-</footer>
-
-<script>
-async function checkRegistrationLimit() {
-  const apiURL = "https://script.google.com/macros/s/AKfycbyNBxYebctLYQ-JdB4d0Qw0qnkO40Qiw2bAMGr161_DZw5CDkFEIY-NoPaJRVdgm6_V/exec"; // 👈 yahan apna /exec URL daalo
-  try {
-    const res = await fetch(apiURL);
-    const data = await res.json();
-
-    if (data.count >=48) {
-      const upiSection = document.getElementById("upi-id-copy-container");
-      const formBtn = document.querySelector('a[href*="forms.gle"]');
-      if (upiSection) upiSection.style.display = "none";
-      if (formBtn) {
-        formBtn.textContent = "🚫 Registration Full";
-        formBtn.removeAttribute("href");
-        formBtn.style.backgroundColor = "#555";
-        formBtn.style.borderColor = "#555";
-      }
-      const notice = document.createElement("p");
-      notice.innerHTML = "<strong style='color:red;'>Registration Full (48/48)</strong>";
-      document.querySelector("#registration .card").appendChild(notice);
-    }
-  } catch (err) {
-    console.error("Registration check error:", err);
-  }
-}
-checkRegistrationLimit();
-</script>
-
-
-
-<script type="module">
-  // --- Step 1: Firebase Imports (Zaroori functions) ---
-  // Note: Hum yahan CDN links use kar rahe hain, jo aapke code mein 'firebase/app' se alag hai, 
-  // lekin yeh browser mein turant kaam karega.
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-
-  // --- Step 2: Aapka Final Firebase Config ---
-  const firebaseConfig = {
-    apiKey: "AIzaSyCjdnnzqHxLEzbUQhNf71bYtr8t1F9aQnM",
-    authDomain: "ffrip-tournament-2025.firebaseapp.com",
-    databaseURL: "https://ffrip-tournament-2025-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "ffrip-tournament-2025",
-    storageBucket: "ffrip-tournament-2025.firebasestorage.app",
-    messagingSenderId: "1029154653663",
-    appId: "1:1029154653663:web:4f0708c22d29890297b06a"
-  };
-
-  // --- Step 3: Firebase ko Initialize Karein ---
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-
-  // --- Step 4: Live Leaderboard Logic ---
-  let allTeamsData = [];
-  const tableBody = document.getElementById('leaderboard-body');
-  const sortSelect = document.getElementById('sortCriteria');
-
-  // Function jo data ko sort aur table mein dikhayega
-  window.renderLeaderboard = function(sortBy) {
-    if (!sortBy) {
-      sortBy = sortSelect.value || 'score';
-    }
+    <footer>
+        <p>© 2025 F.F.R.I.P. E-Sports. सभी अधिकार सुरक्षित।</p>
+    </footer>
     
-    // Score/Kills/Placement ke hisaab se sort karein (bada score pehle)
-    const sortedData = [...allTeamsData].sort((a, b) => b[sortBy] - a[sortBy]);
+    <script>
+        async function checkRegistrationLimit() {
+            const apiURL = "https://script.google.com/macros/s/AKfycbyNBxYebctLYQ-JdB4d0Qw0qnkO40Qiw2bAMGr161_DZw5CDkFEIY-NoPaJRVdgm6_V/exec"; // 👈 yahan apna /exec URL daalo
+            try {
+                const res = await fetch(apiURL);
+                const data = await res.json();
 
-    tableBody.innerHTML = ''; 
-
-    if (sortedData.length === 0) {
-      tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Abhi koi data nahi hai.</td></tr>';
-      return;
-    }
-
-    // Naya data table mein daalein
-    sortedData.forEach((team, index) => {
-      const rank = index + 1;
-      const row = document.createElement('tr');
-      
-      // Top 3 teams ko highlight karein
-      if(rank === 1) row.className = 'rank-1';
-      else if(rank === 2) row.className = 'rank-2';
-      else if(rank === 3) row.className = 'rank-3';
-
-      row.innerHTML = `
-        <td>${rank}</td>
-        <td>${team.name}</td>
-        <td style="font-weight:bold;">${team.score}</td>
-        <td>${team.kills}</td>
-        <td>${team.placement}</td>
-      `;
-      tableBody.appendChild(row);
-    });
-  }
-
-  // --- Step 5: Firebase se Live Data Sunein ---
-  const leaderboardRef = ref(database, 'leaderboard'); 
-  
-  // onValue function live data ko sunta hai
-  onValue(leaderboardRef, (snapshot) => {
-    const data = snapshot.val();
-    
-    if (data) {
-      // Firebase se aaye object ko array mein badlein
-      allTeamsData = Object.values(data);
-      // Data milte hi table ko render karein
-      window.renderLeaderboard(sortSelect.value);
-    } else {
-      allTeamsData = [];
-      window.renderLeaderboard(sortSelect.value);
-    }
-  });
-
-  // Sorting control ko jodein
-  sortSelect.addEventListener('change', (e) => {
-    window.renderLeaderboard(e.target.value);
-  });
+                if (data.count >= 48) {
+                    const upiSection = document.getElementById("upi-id-copy-container");
+                    const formBtn = document.querySelector('a[href*="forms.gle"]');
+                    if (upiSection) upiSection.style.display = "none";
+                    if (formBtn) {
+                        formBtn.textContent = "🚫 Registration Full";
+                        formBtn.removeAttribute("href");
+                        formBtn.style.backgroundColor = "#555";
+                        formBtn.style.borderColor = "#555";
+                    }
+                    const notice = document.createElement("p");
+                    notice.innerHTML = "<strong style='color:red;'>Registration Full (48/48)</strong>";
+                    document.querySelector("#registration .card").appendChild(notice);
+                }
+            } catch (err) {
+                console.error("Registration check error:", err);
+            }
+        }
+        checkRegistrationLimit();
+    </script>
 
 
-  // --- Aapke Purane JavaScript Functions (Countdown, Slider, etc.) ---
+    <script type="module">
+        
+        /* ------------------ Firebase Imports ------------------ */
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
-  // Slider
-  let slides = document.querySelectorAll('.slide');
-  let currentSlide = 0;
-  if (slides.length > 0) {
-    setInterval(() => {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-    }, 5000);
-  }
+        /* ------------------ Firebase Config ------------------ */
+        const firebaseConfig = {
+            apiKey: "AIzaSyCqGXOfGXlax6ICPzqGiHoBTnEe8NokJOY",
+            authDomain: "nd-winner-database.firebaseapp.com",
+            databaseURL: "https://nd-winner-database-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "nd-winner-database",
+            storageBucket: "nd-winner-database.firebasestorage.app",
+            messagingSenderId: "441469197064",
+            appId: "1:441469197064:web:153dd420fda4e381fe2abd",
+            measurementId: "G-22W3YNYYVE"
+        };
 
- // Countdown Section 
- 
-const countdown = document.getElementById("countdown");
-const ctaButton = document.querySelector('.cta-button'); // CTA बटन को भी कैप्चर करें
+        const app = initializeApp(firebaseConfig);
+        const db  = getDatabase(app);
 
-// 1. IST समय प्राप्त करने का फंक्शन (Standard Time Zone Offset)
-function getISTTime() {
-  // वर्तमान UTC समय (milliseconds)
-  const now = new Date();
-  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  // IST ऑफसेट: +5 घंटे 30 मिनट (330 मिनट * 60000 ms/मिनट)
-  const istOffset = 330 * 60000; 
-  return new Date(utc + istOffset);
-}
+        /* ------------------ HTML Elements ------------------ */
+        const matchSelect = document.getElementById("matchSelect");
+        const sortSelect  = document.getElementById("sortCriteria");
+        const tableBody   = document.getElementById("leaderboard-body");
 
-// 2. काउंटडाउन को अपडेट करने का मुख्य फंक्शन
-function updateCountdown() {
-  // IST में तिथियाँ सेट करें (T19:00:00+05:30 IST को दर्शाता है)
-  const startDate = new Date("2025-11-11T19:00:00+05:30").getTime(); // 11 नवंबर 2025 शाम 7:00 बजे IST
-  const endDate = new Date("2025-11-15T23:59:59+05:30").getTime(); // 14 नवंबर 2025 रात 11:59:59 बजे IST
-  const now = getISTTime().getTime(); // वर्तमान IST समय
+        let currentMatchData = [];
+        const PRIZE = ["₹25,000/-", "₹15,000/-", "₹10,000/-"];
 
-  // 🔹 स्थिति 1: रजिस्ट्रेशन शुरू नहीं हुआ (Now < StartDate)
-  if (now < startDate) {
-    const diff = startDate - now;
-    const hrsLeft = Math.floor(diff / (1000 * 60 * 60));
-    const minsLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    
-    countdown.innerHTML = `⏳ रजिस्ट्रेशन <strong>11 नवम्बर शाम 7 बजे</strong> से शुरू होगा (लगभग <strong>${String(hrsLeft).padStart(2,'0')}</strong> घंटे <strong>${String(minsLeft).padStart(2,'0')}</strong> मिनट बाकी)`;
-    
-    // CTA बटन अपडेट: Disabled
-    if (ctaButton) {
-      ctaButton.textContent = "🛡️ 11 नवम्बर शाम 7 बजे शुरू!";
-      ctaButton.style.backgroundColor = "#555";
-      ctaButton.style.borderColor = "#555";
-      ctaButton.style.pointerEvents = "none";
-    }
-    return;
-  }
+        /* ------------------ Render Winners Section (NEW) ------------------ */
+        function renderWinners(data) {
+            // Top 3 डेटा को सॉर्ट करें (स्कोर के आधार पर)
+            let topWinners = [...data].sort((a, b) => (b.score || 0) - (a.score || 0)).slice(0, 3);
+            
+            // विनर कार्ड अपडेट करें
+            for (let i = 0; i < 3; i++) {
+                const winner = topWinners[i];
+                const index = i + 1;
+                
+                // ध्यान दें: आपको HTML में winner1-name, winner1-prize, winner1-img ID वाले एलिमेंट्स को जोड़ना होगा
+                // अभी के लिए यह कोड काम नहीं करेगा, क्योंकि ये ID आपके HTML में मौजूद नहीं हैं (आपने केवल Leaderboard सेक्शन दिया था)।
+                // इसलिए, मैं इन्हें कमेंट कर रहा हूँ जब तक आप विनर सेक्शन HTML प्रदान नहीं करते।
+                
+                // const cardName = document.getElementById(`winner${index}-name`);
+                // const cardPrize = document.getElementById(`winner${index}-prize`);
+                // const cardImg = document.getElementById(`winner${index}-img`);
+                
+                // if (winner && cardName && cardPrize && cardImg) {
+                //     const logoUrl = winner.img_url || cardImg.src; 
 
-  // 🔹 स्थिति 3: रजिस्ट्रेशन खत्म हो गया (Now > EndDate)
-  if (now > endDate) {
-    countdown.innerHTML = "🚫 रजिस्ट्रेशन बंद हो चुका है";
-    
-    // CTA बटन अपडेट: Closed
-    if (ctaButton) {
-      ctaButton.textContent = "🚫 रजिस्ट्रेशन बंद";
-      ctaButton.removeAttribute("href");
-      ctaButton.style.backgroundColor = "#990000";
-      ctaButton.style.borderColor = "#FF4444";
-      ctaButton.style.pointerEvents = "none";
-    }
-    return;
-  }
+                //     cardName.textContent = winner.name || `विनर ${index}`;
+                //     cardPrize.textContent = PRIZE[i];
+                //     cardImg.src = logoUrl;
+                // }
+            }
+        }
 
-  // 🔹 स्थिति 2: रजिस्ट्रेशन बीच में है (Live Countdown)
-  const distance = endDate - now;
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        /* ------------------ Render Table (FIXED) ------------------ */
+        function renderTable() {
+            let sorted = [...currentMatchData];
+            const sortBy = sortSelect.value;
 
-  countdown.innerHTML =
-    `रजिस्ट्रेशन बंद होने में: <strong>${String(days).padStart(2,'0')}</strong> दिन <strong>${String(hours).padStart(2,'0')}</strong> घंटे <strong>${String(minutes).padStart(2,'0')}</strong> मिनट`;
+            // FIX 1: सॉर्टिंग के लिए || 0 का उपयोग करें ताकि NaN त्रुटि न आए
+            sorted.sort((a, b) => (b[sortBy] || 0) - (a[sortBy] || 0));
 
-  // CTA बटन अपडेट: Active (इसे अपनी डिफ़ॉल्ट सक्रिय स्थिति में रखें)
-  if (ctaButton) {
-    ctaButton.textContent = "🛡️ अभी रजिस्टर करें!";
-    ctaButton.setAttribute("href", "#registration");
-    ctaButton.style.backgroundColor = "var(--accent-color)";
-    ctaButton.style.borderColor = "var(--highlight-color)";
-    ctaButton.style.pointerEvents = "auto";
-  }
-}
+            tableBody.innerHTML = "";
 
-// 3. टाइमर को शुरू करें और हर मिनट अपडेट करें
-updateCountdown();
-setInterval(updateCountdown, 60000);
+            if (sorted.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">कोई टीम डेटा उपलब्ध नहीं है।</td></tr>';
+                return;
+            }
 
+            // innerHTML += का उपयोग करने के बजाय एक स्ट्रिंग बनाएं और एक बार में सेट करें (बेहतर प्रदर्शन के लिए)
+            let rowsHTML = '';
 
+            sorted.forEach((t, i) => {
+                // FIX 2: अनुपलब्ध डेटा के लिए '-' का उपयोग करें
+                const score = t.score !== undefined && t.score !== null ? t.score : '-';
+                const kills = t.kills !== undefined && t.kills !== null ? t.kills : '-';
+                const placement = t.placement !== undefined && t.placement !== null ? t.placement : '-';
+                
+                const rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : '';
 
+                rowsHTML += `
+                    <tr class="${rankClass}">
+                        <td>${i + 1}</td>
+                        <td>${t.name || 'Unknown Team'}</td>
+                        <td style="font-weight:bold;">${score}</td>
+                        <td>${kills}</td>
+                        <td>${placement}</td>
+                    </tr>
+                `;
+            });
+            
+            tableBody.innerHTML = rowsHTML;
+            
+            // यदि फाइनल लीडरबोर्ड है, तो विनर्स सेक्शन को भी अपडेट करें
+            if (matchSelect.value === "final") {
+                renderWinners(sorted);
+            }
+        }
 
+        /* ------------------ Load Single Match ------------------ */
+        function loadMatch(matchKey) {
+            const dbRef = ref(db, `leaderboard/${matchKey}`);
 
-  // UPI copy
-  const upiCopyEl = document.getElementById('upi-id-copy');
-  if (upiCopyEl) {
-    upiCopyEl.addEventListener('click', () => {
-      navigator.clipboard.writeText(upiCopyEl.textContent).then(() => {
-        alert('UPI ID copied!');
-      });
-    });
-  }
-  
-  // Hamburger toggle
-  window.toggleMenu = function() {
-    document.querySelector('nav div:not(.nav-hamburger)').classList.toggle('active');
-  }
+            onValue(dbRef, (snapshot) => {
+                const data = snapshot.val();
+                // Firebase ऑब्जेक्ट को ऐरे में बदलें
+                currentMatchData = data ? Object.values(data) : []; 
+                renderTable();
+            });
+        }
 
-  // matchSectionHeights (Optional)
-  function matchSectionHeights() { 
-      const sections=document.querySelectorAll('.two-column-section'); 
-      sections.forEach(sec=>{ 
-          const divs=sec.querySelectorAll('> div'); 
-          let maxHeight=0; 
-          divs.forEach(d=>maxHeight=Math.max(maxHeight,d.offsetHeight)); 
-      }); 
-  }
-  window.addEventListener('load',matchSectionHeights); 
-  window.addEventListener('resize',matchSectionHeights);
+        /* ------------------ Load Final Leaderboard (FULLY FIXED) ------------------ */
+        function loadFinalLeaderboard() {
+            const dbRef = ref(db, "leaderboard");
 
-</script>
+            // FIX: एक ही बार में पूरे लीडरबोर्ड डेटा को लोड करें
+            onValue(dbRef, (snapshot) => {
+                const fullData = snapshot.val() || {};
+                const final = {};
+
+                // सभी matches (match1, match2, match3, etc.) के माध्यम से लूप करें
+                for (const matchKey in fullData) {
+                    const matchData = fullData[matchKey];
+                    
+                    // मैच के अंदर की सभी टीमों के माध्यम से लूप करें
+                    for (const teamKey in matchData) {
+                        const t = matchData[teamKey];
+                        
+                        // अगर टीम पहले से फाइनल ऑब्जेक्ट में नहीं है, तो उसे इनिशियलाइज़ (initialize) करें
+                        if (!final[teamKey]) {
+                            final[teamKey] = {
+                                name: t.name || teamKey, 
+                                score: 0, 
+                                kills: 0, 
+                                placement: 0,
+                                img_url: t.img_url || null
+                            };
+                        }
+
+                        // स्कोर जोड़ें (|| 0 का उपयोग करें ताकि NaN न हो)
+                        final[teamKey].score += (t.score || 0);
+                        final[teamKey].kills += (t.kills || 0);
+                        final[teamKey].placement += (t.placement || 0);
+                        
+                        // सुनिश्चित करें कि img_url हमेशा मौजूद रहे
+                        if (t.img_url) {
+                            final[teamKey].img_url = t.img_url;
+                        }
+                    }
+                }
+
+                currentMatchData = Object.values(final);
+                renderTable();
+            });
+        }
+        
+        /* ------------------ Dropdown Listeners ------------------ */
+        matchSelect.addEventListener("change", () => {
+            if (matchSelect.value === "final") loadFinalLeaderboard();
+            else loadMatch(matchSelect.value);
+        });
+
+        sortSelect.addEventListener("change", renderTable);
+
+        /* ------------------ Default Load ------------------ */
+        // पेज लोड होने पर 'final' लीडरबोर्ड लोड करें
+        loadFinalLeaderboard();
+
+        
+        // --- अन्य JavaScript फ़ंक्शन्स ---
+        // Slider
+        let slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        if (slides.length > 0) {
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+        
+        // Countdown Section
+        const countdown = document.getElementById("countdown");
+        const ctaButton = document.querySelector('.cta-button'); 
+
+        function getISTTime() {
+            const now = new Date();
+            const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+            const istOffset = 330 * 60000; 
+            return new Date(utc + istOffset);
+        }
+
+        function updateCountdown() {
+            const startDate = new Date("2025-11-11T19:00:00+05:30").getTime(); 
+            const endDate = new Date("2025-11-15T23:59:59+05:30").getTime(); 
+            const now = getISTTime().getTime();
+
+            if (now < startDate) {
+                const diff = startDate - now;
+                const hrsLeft = Math.floor(diff / (1000 * 60 * 60));
+                const minsLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                countdown.innerHTML = `⏳ रजिस्ट्रेशन <strong>11 नवम्बर शाम 7 बजे</strong> से शुरू होगा (लगभग <strong>${String(hrsLeft).padStart(2,'0')}</strong> घंटे <strong>${String(minsLeft).padStart(2,'0')}</strong> मिनट बाकी)`;
+                
+                if (ctaButton) {
+                    ctaButton.textContent = "🛡️ 11 नवम्बर शाम 7 बजे शुरू!";
+                    ctaButton.style.backgroundColor = "#555";
+                    ctaButton.style.borderColor = "#555";
+                    ctaButton.style.pointerEvents = "none";
+                }
+                return;
+            }
+
+            if (now > endDate) {
+                countdown.innerHTML = "🚫 रजिस्ट्रेशन बंद हो चुका है";
+                
+                if (ctaButton) {
+                    ctaButton.textContent = "🚫 रजिस्ट्रेशन बंद";
+                    ctaButton.removeAttribute("href");
+                    ctaButton.style.backgroundColor = "#990000";
+                    ctaButton.style.borderColor = "#FF4444";
+                    ctaButton.style.pointerEvents = "none";
+                }
+                return;
+            }
+
+            const distance = endDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            countdown.innerHTML =
+                `रजिस्ट्रेशन बंद होने में: <strong>${String(days).padStart(2,'0')}</strong> दिन <strong>${String(hours).padStart(2,'0')}</strong> घंटे <strong>${String(minutes).padStart(2,'0')}</strong> मिनट`;
+
+            if (ctaButton) {
+                ctaButton.textContent = "🛡️ अभी रजिस्टर करें!";
+                ctaButton.setAttribute("href", "#registration");
+                ctaButton.style.backgroundColor = "var(--accent-color)";
+                ctaButton.style.borderColor = "var(--highlight-color)";
+                ctaButton.style.pointerEvents = "auto";
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+
+        // UPI copy
+        const upiCopyEl = document.getElementById('upi-id-copy');
+        if (upiCopyEl) {
+            upiCopyEl.addEventListener('click', () => {
+                navigator.clipboard.writeText(upiCopyEl.textContent).then(() => {
+                    alert('UPI ID copied!');
+                });
+            });
+        }
+
+        // Hamburger toggle
+        window.toggleMenu = function() {
+            document.querySelector('nav div:not(.nav-hamburger)').classList.toggle('active');
+        }
+
+        // matchSectionHeights (Optional)
+        function matchSectionHeights() {
+            const sections = document.querySelectorAll('.two-column-section');
+            sections.forEach(sec => {
+                const divs = sec.querySelectorAll('> div');
+                let maxHeight = 0;
+                divs.forEach(d => maxHeight = Math.max(maxHeight, d.offsetHeight));
+            });
+        }
+        window.addEventListener('load', matchSectionHeights);
+        window.addEventListener('resize', matchSectionHeights);
+    </script>
 </body>
 </html>
