@@ -741,13 +741,13 @@
     <header>
         <div class="container">
             <nav>
-                <h3>F.F.R.I.P. E-Sports</h3>
+                <h3>GAH E-Sports Club</h3>
                 <div class="nav-hamburger" onclick="toggleMenu()">&#9776;</div>
                 <div>
-                    <a href="#home"><i class="fas fa-home"></i> होम</a>
-                    <a href="#registration"><i class="fas fa-edit"></i> रजिस्ट्रेशन</a>
+                    <a href="#home"><i class="fas fa-home"></i> Home</a>
+                    <a href="#registration"><i class="fas fa-edit"></i> Registration</a>
                     <a href="#combined-info"><i class="fas fa-trophy"></i> पुरस्कार / Leaderboard / Stream</a>
-                    <a href="#schedule-rules"><i class="fas fa-calendar-alt"></i> शेड्यूल / नियम</a>
+                    <a href="#schedule-rules"><i class="fas fa-calendar-alt"></i> Schedule / Rule</a>
                 </div>
             </nav>
         </div>
@@ -761,20 +761,20 @@
         </div>
         <div class="hero-content">
             <h1>🔵 F.F.R.I.P. CHAMPIONSHIP 2025 🏆</h1>
-            <p>कुल ₹1000/- का प्राइज पूल। अपना स्क्वाड तैयार करें!</p>
-            <a href="#registration" class="cta-button">🛡️ अभी रजिस्टर करें!</a>
+            <p>Total prize pool of ₹1000/-. Get your squad ready!!</p>
+            <a href="#registration" class="cta-button">🛡️ Register Now!</a>
             <div class="timer" id="countdown">रजिस्ट्रेशन बंद होने में: **05** दिन **12** घंटे **30** मिनट</div>
         </div>
     </section>
 
     <section id="registration" class="container">
-        <h2>📝 टीम रजिस्ट्रेशन (FREE ENTRY)</h2>
+        <h2>📝 Team Registration (FREE ENTRY)</h2>
         <div class="card" style="text-align:center; border-left:4px solid #FFD700;">
             <p style="font-size:1.2em; font-weight:700; color:var(--highlight-color); margin-bottom:20px;">रजिस्ट्रेशन के लिए इन 3 स्टेप्स को फॉलो करें:</p>
             <div class="reg-step">
                 <i class="fas fa-money-check-alt"></i>
                 <div>
-                    <h3>1. रजिस्ट्रेशन फीस का भुगतान करें (Free Entry )</h3>
+                    <h3>1.Pay the registration fee (Free Entry )</h3>
                     <p style="font-weight:bold; color:var(--accent-color);" id="upi-id-copy-container">UPI ID: <span id="upi-id-copy" style="cursor:pointer; text-decoration:underline;">ankitkumarbind2222@okaxis</span> (कॉपी करने के लिए क्लिक करें)</p>
                     <p>भुगतान के बाद Transaction ID संभाल कर रखें।</p>
                 </div>
@@ -790,7 +790,7 @@
             <div class="reg-step" style="border-left:4px solid #25D366;">
                 <i class="fab fa-whatsapp"></i>
                 <div>
-                    <h3>3. WhatsApp ग्रुप जॉइन करें</h3>
+                    <h3>3.Join the WhatsApp Group</h3>
                     <a href="https://chat.whatsapp.com/Gxve7efJHo2F95MDlzTyGG?mode=wwt" target="_blank" class="cta-button" style="background-color:#25D366; border-color:#25D366; color:#fff;">💬 WhatsApp जॉइन करें</a>
                 </div>
             </div>
@@ -799,9 +799,9 @@
 
     <section id="combined-info" class="container two-column-section">
         <div>
-            <h2>🏆 पुरस्कार</h2>
+            <h2>🏆 Prize</h2>
             <div class="card">
-                <p>🥇 1st Place: ₹150/-<br>🥈 2nd Place: ₹75/-<br>🥉 3rd Place: ₹50/-</p>
+                <p>🥇 1st Place: ₹100/-<br>🥈 2nd Place: ₹75/-<br>🥉 3rd Place: ₹50/-</p>
             </div>
         </div>
         
@@ -848,7 +848,7 @@
             </div>
         </div>
         <div>
-            <h2>📺 लाइव स्ट्रीम</h2>
+            <h2>📺 Live Stream</h2>
             <div class="card stream-card">
                 <iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" title="Live Stream" allowfullscreen></iframe>
             </div>
@@ -928,12 +928,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>16-Nov-2025</td>
+                        <td>22-Nov-2025</td>
                         <td>6:00 PM</td>
                         <td>Qualifier</td>
                     </tr>
                     <tr>
-                        <td>16-Nov-2025</td>
+                        <td>22-Nov-2025</td>
                         <td>6:00 PM</td>
                         <td>Finals</td>
                     </tr>
@@ -1016,7 +1016,7 @@
         const tableBody   = document.getElementById("leaderboard-body");
 
         let currentMatchData = [];
-        const PRIZE = ["₹25,000/-", "₹15,000/-", "₹10,000/-"];
+        const PRIZE = ["₹100/-", "₹75/-", "₹50/-"];
 
         /* ------------------ Render Winners Section (NEW) ------------------ */
         function renderWinners(data) {
@@ -1185,8 +1185,8 @@
         }
 
         function updateCountdown() {
-            const startDate = new Date("2025-11-11T19:00:00+05:30").getTime(); 
-            const endDate = new Date("2025-11-15T23:59:59+05:30").getTime(); 
+            const startDate = new Date("2025-11-18T9:30:00+05:30").getTime(); 
+            const endDate = new Date("2025-11-22T00:00:00+05:30").getTime(); 
             const now = getISTTime().getTime();
 
             if (now < startDate) {
@@ -1194,10 +1194,10 @@
                 const hrsLeft = Math.floor(diff / (1000 * 60 * 60));
                 const minsLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 
-                countdown.innerHTML = `⏳ रजिस्ट्रेशन <strong>11 नवम्बर शाम 7 बजे</strong> से शुरू होगा (लगभग <strong>${String(hrsLeft).padStart(2,'0')}</strong> घंटे <strong>${String(minsLeft).padStart(2,'0')}</strong> मिनट बाकी)`;
+                countdown.innerHTML = `⏳ रजिस्ट्रेशन <strong>🛡️ 18 November, 9:30 PM</strong> से शुरू होगा (लगभग <strong>${String(hrsLeft).padStart(2,'0')}</strong> घंटे <strong>${String(minsLeft).padStart(2,'0')}</strong> मिनट बाकी)`;
                 
                 if (ctaButton) {
-                    ctaButton.textContent = "🛡️ 11 नवम्बर शाम 7 बजे शुरू!";
+                    ctaButton.textContent = "🛡️ Starts on 18 November at 9:30 PM!";
                     ctaButton.style.backgroundColor = "#555";
                     ctaButton.style.borderColor = "#555";
                     ctaButton.style.pointerEvents = "none";
