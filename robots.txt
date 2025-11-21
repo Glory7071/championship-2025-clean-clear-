@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://https://championship-2025-clean-clear.vercel.app//sitemap.xml
