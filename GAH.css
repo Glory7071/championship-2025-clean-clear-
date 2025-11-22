@@ -1,0 +1,1021 @@
+  :root {
+            --dark-bg: #141D2B;
+            --card-bg: #1F2A38;
+            --accent-color: #00BFFF;
+            --highlight-color: #00FFFF;
+            --text-light: #E0E6F0;
+            --text-dark: #FFFFFF;
+            --font-main: 'Exo 2', sans-serif;
+            --font-heading: 'Orbitron', sans-serif;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-main);
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            scroll-behavior: smooth;
+        }
+
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: linear-gradient(to right, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 30s linear infinite;
+            opacity: 0.2;
+        }
+
+        @keyframes moveGrid {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 50px 50px;
+            }
+        }
+
+        header {
+            background-color: rgba(20, 29, 43, 0.95);
+            padding: 10px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            border-bottom: 3px solid var(--accent-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav h3 {
+            font-family: var(--font-heading);
+            font-size: 1.6em;
+            color: var(--highlight-color);
+            margin: 0;
+            padding: 5px 0;
+            white-space: nowrap;
+        }
+
+        nav div {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            margin-top: 5px;
+        }
+
+        nav a {
+            color: var(--text-light) !important;
+            text-decoration: none !important;
+            padding: 8px 12px;
+            margin: 3px 5px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            border: 1px solid transparent;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-color);
+            color: var(--dark-bg) !important;
+            box-shadow: 0 0 10px var(--highlight-color);
+            border-color: var(--highlight-color);
+        }
+
+        /* Hamburger */
+        .nav-hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8em;
+            color: var(--highlight-color);
+        }
+
+        @media (max-width: 768px) {
+            nav div:not(.nav-hamburger) {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            nav div:not(.nav-hamburger).active {
+                display: flex;
+            }
+
+            .nav-hamburger {
+                display: block;
+            }
+        }
+
+        /* Hero */
+        .hero {
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            color: var(--text-dark);
+            text-shadow: 0 0 20px var(--highlight-color), 0 0 40px rgba(0, 191, 255, 0.5);
+            margin-bottom: 10px;
+            font-family: var(--font-heading);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--text-light);
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .timer {
+            margin-top: 20px;
+            font-size: 1.8em;
+            padding: 10px 30px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--highlight-color);
+            color: var(--highlight-color);
+        }
+
+        .timer strong {
+            color: var(--text-dark);
+        }
+
+        .slider-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            filter: brightness(0.7);
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--text-dark) !important;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 40px;
+            font-size: 1.3em;
+            font-weight: 900;
+            margin: 15px;
+            box-shadow: 0 0 15px var(--highlight-color);
+            transition: all 0.4s ease;
+            border: 2px solid var(--highlight-color);
+        }
+
+        .cta-button:hover {
+            background-color: var(--highlight-color);
+            color: var(--dark-bg) !important;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--highlight-color);
+        }
+
+        /* Sections */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 10px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: var(--highlight-color);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+            position: relative;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            margin: 15px 0;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-color);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 1);
+        }
+
+        .two-column-section {
+            display: flex;
+            gap: 50px;
+            align-items: stretch;
+            margin-top: 20px;
+        }
+
+        .two-column-section>div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .two-column-section>div .card {
+            flex: 1;
+        }
+
+        .stream-card iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+        }
+
+        /* Registration */
+        .reg-step {
+            background-color: #283747;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--accent-color);
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+
+        .reg-step i {
+            font-size: 2em;
+            color: var(--highlight-color);
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .reg-step h3 {
+            margin: 0;
+            font-size: 1.1em;
+            color: var(--text-dark);
+            font-family: var(--font-main);
+            text-transform: none;
+        }
+
+        .reg-step p {
+            margin: 5px 0 0 0;
+            font-size: 0.9em;
+            color: #ccc;
+        }
+
+        /* Leaderboard */
+        .leaderboard-controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1em;
+        }
+
+        .leaderboard-controls label {
+            margin-right: 10px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .leaderboard-controls select {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-color);
+            background-color: var(--card-bg);
+            color: var(--text-light);
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%2300FFFF" d="M6 9l-4-4h8z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            padding-right: 25px;
+            cursor: pointer;
+        }
+        
+        /* ⭐ Leaderboard CSS Fixes ⭐ */
+        
+        /* 1. हॉरिजॉन्टल और वर्टिकल स्क्रोलिंग कंटेनर */
+        .responsive-table-wrapper {
+            overflow-x: auto !important;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 10px;
+        }
+
+        .leaderboard-scroll {
+            max-height: 180px !important; /* V-Scroll हाइट (3-4 टीमें) */
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            display: block !important;
+        }
+
+        /* 2. टेबल चौड़ाई (H-Scroll को सक्रिय करने के लिए) */
+        .leaderboard table, #schedule table {
+            width: 100%;
+            min-width: 700px !important; /* H-Scroll के लिए फिक्स चौड़ाई */
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        /* 3. सामान्य सेल और रो स्टाइलिंग (कम स्पेसिंग) */
+        .leaderboard th, .leaderboard td, #schedule th, #schedule td {
+            padding: 6px 5px !important; /* Row गैप फिक्स */
+            text-align: center;
+            border-bottom: 1px solid #333;
+            color: var(--text-light);
+            line-height: 1.2; /* टेक्स्ट रैपिंग को नियंत्रित करने के लिए */
+        }
+        
+        /* 4. रैंक और टीम कॉलम की चौड़ाई फिक्स करें */
+        .leaderboard th:nth-child(1),
+        .leaderboard td:nth-child(1) {
+            width: 60px !important;
+            min-width: 60px !important;
+        }
+
+        .leaderboard th:nth-child(2),
+        .leaderboard td:nth-child(2) {
+            width: 120px !important;
+            min-width: 120px !important;
+        }
+
+        /* 5. स्टिकी हेडर और रैंकिंग कलर */
+        #leaderboardTable th, .leaderboard th, #schedule thead th {
+            background: rgba(0, 191, 255, 0.15);
+            color: var(--highlight-color);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        .leaderboard tr:hover, #schedule tbody tr:hover {
+            background-color: #314256;
+        }
+
+        .leaderboard tr.rank-1 {
+            background-color: rgba(0, 255, 255, 0.2);
+            border-left: 5px solid var(--highlight-color);
+            color: var(--highlight-color);
+            font-weight: bold;
+        }
+
+        .leaderboard tr.rank-2 {
+            background-color: rgba(100, 149, 237, 0.2);
+            border-left: 5px solid #6495ED;
+            color: #6495ED;
+        }
+
+        .leaderboard tr.rank-3 {
+            background-color: rgba(173, 216, 230, 0.2);
+            border-left: 5px solid #ADD8E6;
+            color: #ADD8E6;
+        }
+
+        /* Schedule */
+        #schedule table {
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #schedule thead th {
+            background-color: var(--accent-color);
+            color: var(--dark-bg);
+            font-weight: 900;
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            padding: 20px 0;
+            border-top: 3px solid var(--accent-color);
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        /* Responsive */
+        @media (max-width:992px) {
+            .hero h1 {
+                font-size: 3.5em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            .cta-button {
+                font-size: 1.2em;
+                padding: 15px 30px;
+            }
+
+            .timer {
+                font-size: 1.5em;
+                padding: 10px 20px;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            nav a {
+                padding: 8px 10px;
+                margin: 3px;
+            }
+        }
+
+        @media (max-width:768px) {
+            .hero {
+                height: 40vh;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+                line-height: 1.1;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .timer {
+                font-size: 1.2em;
+            }
+
+            .two-column-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .two-column-section>div .card {
+                height: auto;
+            }
+            
+            /* Leaderboard के लिए मुख्य फिक्स */
+.responsive-table-wrapper { 
+    overflow-x: auto !important; /* सुनिश्चित करें कि यह हमेशा लागू हो */
+    -webkit-overflow-scrolling: touch; 
+    padding-bottom: 10px;
+}
+
+/*... बाक़ी CSS ...*/
+
+@media (max-width:768px){    
+    .hero{ height:40vh; }    
+    .hero h1{ font-size:2.5em; line-height:1.1; }    
+    .hero p{ font-size:1em; }    
+    .timer{ font-size:1.2em; }    
+    .two-column-section{ flex-direction:column; gap:20px; }    
+    .two-column-section > div .card{ height:auto; }
+    
+    /* ⭐ फिक्स: हॉरिजॉन्टल स्क्रॉलिंग को सुनिश्चित करें ⭐ */
+    .responsive-table-wrapper {
+        overflow-x: auto !important;
+        width: 100%; /* यह सुनिश्चित करता है कि कंटेनर डिवाइस की पूरी चौड़ाई ले */
+    }
+    
+    /* ⭐ मोबाइल फिक्स: Row की ऊँचाई और कॉलम चौड़ाई ⭐ */
+    .leaderboard th, .leaderboard td, #schedule th, #schedule td {
+        font-size: 0.85em;
+        padding: 6px 5px !important; 
+    }
+
+    /* रैंक और टीम की चौड़ाई को और कम करें */
+    .leaderboard th:nth-child(1),
+    .leaderboard td:nth-child(1) {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
+
+    .leaderboard th:nth-child(2),
+    .leaderboard td:nth-child(2) {
+        width: 80px !important;
+        min-width: 80px !important;
+    }
+}
+        }
+
+        @media(max-width:480px) {
+            .container {
+                width: 95%;
+            }
+
+            .hero {
+                height: 32vh;
+            }
+
+            .hero h1 {
+                font-size: 1.6em;
+                letter-spacing: 1px;
+            }
+
+            .hero p {
+                font-size: 0.8em;
+                margin-bottom: 5px;
+            }
+
+            .cta-button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+                margin: 8px;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .timer {
+                font-size: 0.9em;
+                padding: 6px 10px;
+            }
+
+            nav h3 {
+                font-size: 1.3em;
+            }
+
+            nav a {
+                font-size: 0.8em;
+                padding: 4px 10px;
+            }
+
+            .reg-step h3 {
+                font-size: 1em;
+            }
+
+            .reg-step p {
+                font-size: 0.8em;
+            }
+        }
+
+
+
+        /* ============================= */
+/* ⭐ FINAL WINNER SECTION CSS   */
+/* ============================= */
+
+.winner-section {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.winner-title {
+  font-size: 28px;
+  color: #00eaff;
+  text-shadow: 0 0 12px #00eaffaa;
+  margin-bottom: 25px;
+}
+
+/* Winner card wrapper */
+.winner-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+/* Winner Card */
+.winner-card {
+  width: 220px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 18px #00eaff50;
+  transition: 0.4s ease;
+  text-align: center;
+}
+
+.winner-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 32px #00eaffaa;
+}
+
+/* Neon Ring Photo */
+.winner-ring {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+  border: 4px solid #00eaff;
+  box-shadow: 0 0 25px #00eaff, inset 0 0 10px #003f47;
+  animation: neonPulse 2s infinite ease-in-out;
+}
+
+.winner-ring img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Neon Pulse */
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 15px #00eaff; }
+  50% { box-shadow: 0 0 35px #00eaff; }
+  100% { box-shadow: 0 0 15px #00eaff; }
+}
+
+/* Text */
+.winner-card h3 {
+  color: white;
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.winner-card p {
+  color: #00eaff;
+  margin: 6px 0;
+  font-size: 18px;
+}
+
+.winner-card span {
+  display: block;
+  color: #ffd700;
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+/* GOLDS / SILVER / BRONZE GLOW */
+.gold { box-shadow: 0 0 20px #ffd70055 !important; }
+.gold:hover { box-shadow: 0 0 35px #ffd700aa !important; }
+
+.silver { box-shadow: 0 0 20px #c0c0c055 !important; }
+.silver:hover { box-shadow: 0 0 35px #c0c0c0aa !important; }
+
+.bronze { box-shadow: 0 0 20px #cd7f3255 !important; }
+.bronze:hover { box-shadow: 0 0 35px #cd7f32aa !important; }
+
+.winner-note {
+  margin-top: 20px;
+  color: #8affff;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+
+
+
+/* 🔥 NEON GAMING UI */
+
+.reg-section {
+    padding: 30px 15px;
+    text-align: center;
+}
+
+.reg-title {
+    font-size: 28px;
+    color: #00eaff;
+    text-shadow: 0 0 10px #00eaff;
+    margin-bottom: 20px;
+}
+
+.neon-card {
+    background: rgba(10, 10, 20, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 420px;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.neon-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.neon-form input,
+.neon-form select {
+    padding: 10px;
+    background: rgba(20, 20, 35, 0.8);
+    border: 1px solid #00eaff;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    text-shadow: 0 0 5px #00eaff;
+}
+
+.neon-btn {
+    margin-top: 10px;
+    padding: 12px;
+    background: #00eaff;
+    border-radius: 10px;
+    color: #000;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 20px #00eaff;
+}
+
+.neon-btn:hover {
+    box-shadow: 0 0 30px #00eaff;
+}
+
+.status-text {
+    margin-top: 10px;
+    color: #00eaff;
+    font-size: 15px;
+    text-shadow: 0 0 10px #00eaff;
+}
+
+.upi-qr {
+    width: 230px;
+    margin: 15px auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #00eaff;
+}
+
+.pay-title {
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff;
+}
+
+.upi-text {
+    color: #fff;
+    margin-top: 5px;
+}
+
+.success-note {
+    margin-top: 15px;
+    color: #00ff85;
+    text-shadow: 0 0 10px #00ff85;
+}
+
+
+/* --- प्रोफेशनल लेआउट और कलर फिक्स (Emerald Theme) --- */
+
+/* फॉर्म कंटेनर को साफ़-सुथरा सिंगल-कॉलम लेआउट दें */
+#final-registration-form {
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* पूरी चौड़ाई का उपयोग करें */
+    padding: 0 10px; 
+}
+
+/* सभी इनपुट और SELECT फ़ील्ड्स के लिए बेस स्टाइलिंग */
+#final-registration-form input,
+#final-registration-form select {
+    /* फिक्स: सुनिश्चित करें कि ये हमेशा एक लाइन में पूरी चौड़ाई लें */
+    display: block; 
+    width: 100%; 
+    max-width: 480px; /* डेस्कटॉप पर अधिकतम चौड़ाई */
+    
+    padding: 16px 15px; 
+    margin: 10px 0; 
+    
+    border-radius: 8px; 
+    border: 1px solid #4A5568; 
+    background-color: #1A202C; 
+    color: var(--text-light);
+    
+    font-size: 1em; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+    appearance: none; /* Select dropdown को स्टाइल करने के लिए (सिर्फ़ Select के लिए) */
+    -webkit-appearance: none;
+}
+
+/* फोकस होने पर (जब यूज़र क्लिक करे) Emerald Green इफ़ेक्ट */
+#final-registration-form input:focus,
+#final-registration-form select:focus {
+    outline: none; 
+    /* बॉर्डर को Emerald Green हाइलाइट कलर दें */
+    border-color: var(--highlight-color); 
+    /* Emerald Green की हल्की चमक */
+    box-shadow: 0 0 12px rgba(0, 230, 118, 0.6); 
+    background-color: #2D3748; 
+}
+
+/* प्लेसहोल्डर टेक्स्ट का रंग */
+#final-registration-form input::placeholder,
+#final-registration-form option[disabled] {
+    color: #90A4AE; 
+    opacity: 0.8; 
+}
+
+/* बटन का स्टाइल (Confirm Button) */
+#submit-reg-btn {
+    width: 100%;
+    max-width: 480px; 
+    font-weight: bold;
+    padding: 18px 40px !important; 
+    font-size: 1.25em !important;
+}
+/* गेमिंग नियॉन ग्लो इफ़ेक्ट */
+.neon-glow {
+    /* हाईलाइट कलर का उपयोग करें */
+    color: var(--highlight-color); 
+    text-shadow: 
+        0 0 7px rgba(0, 230, 118, 0.7), /* हल्का ग्लो */
+        0 0 10px rgba(0, 230, 118, 0.5), /* मध्यम ग्लो */
+        0 0 21px rgba(0, 230, 118, 0.3); /* ज़्यादा फैला हुआ ग्लो */
+    transition: text-shadow 0.3s ease-in-out;
+}
+
+/* आपके CSS फाइल में जोड़ें या बदलें */
+#final-registration-form input[type="text"],
+#final-registration-form input[type="email"],
+#final-registration-form select {
+    /* 1. पैडिंग कम करें: मोबाइल पर 15px से 10px टॉप/बॉटम, और 15px लेफ्ट/राइट काफी है */
+    padding: 10px 15px; 
+    
+    /* 2. फॉन्ट साइज़ को स्थिर रखें या थोड़ा कम करें (जैसे 1em = 16px) */
+    font-size: 1em; 
+    
+    /* 3. बॉक्सेज़ के बीच की दूरी कम करें (यदि यह ज्यादा लग रही हो) */
+    margin-bottom: 12px; /* 15px-20px से कम करके 12px करें */
+    
+    /* 4. चौड़ाई 100% रखें ताकि वह कार्ड में फिट हो जाए */
+    width: calc(100% - 30px); /* 100% - (लेफ्ट पैडिंग + राइट पैडिंग) */
+    
+    /* यदि आपने border-radius बहुत बड़ा रखा है, तो उसे 6px-8px रखें */
+    border-radius: 6px; 
+    
+    /* यदि आपने width: 100%; नहीं दी है, तो वह भी जोड़ें */
+    box-sizing: border-box; /* पैडिंग को कुल चौड़ाई में शामिल करें */
+}
+
+
+
+/* Registrant Gallery Styles */
+.gallery-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.player-carousel-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+}
+
+/* हर व्यक्तिगत प्लेयर कार्ड का स्टाइल */
+.player-card {
+    /* min-width: 280px; को बढ़ाकर 300px किया गया (नीचे मीडिया क्वेरी देखें) */
+    min-width: 280px; 
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    margin-right: 15px; 
+    
+    background-color: #2D3748; 
+    border: 1px solid var(--accent-color);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* IGN को बड़ा और प्रमुख बनाने के लिए */
+.player-card h4 {
+    color: var(--highlight-color); /* IGN गोल्ड में */
+    margin: 5px 0 5px 0;
+    font-size: 1.3em; /* 1.1em से बढ़ाकर 1.3em किया गया */
+    font-weight: 700; /* बोल्ड किया गया */
+    text-transform: uppercase;
+    white-space: nowrap; /* नाम एक लाइन में रहे */
+    overflow: hidden;
+    text-overflow: ellipsis; /* यदि नाम बहुत लंबा हो तो ... दिखे */
+}
+
+/* डिवाइस के फ़ॉन्ट को कॉम्पैक्ट रखें */
+.player-card p {
+    color: var(--text-light);
+    font-size: 0.85em; /* 0.9em से छोटा किया गया */
+    margin: 0;
+    opacity: 0.8; /* थोड़ा हल्का */
+}
+
+/* ✅ अवतार का आकार बढ़ाया गया ✅ */
+.player-avatar {
+    width: 90px; /* 60px से बढ़ाकर 90px किया गया */
+    height: 90px; /* 60px से बढ़ाकर 90px किया गया */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--highlight-color); /* बॉर्डर को 3px से 4px किया गया */
+    margin-bottom: 10px; /* IGN से थोड़ी दूरी दें */
+}
+
+/* नेविगेशन बटन स्टाइल वही रहेगा */
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(183, 28, 28, 0.7);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    font-size: 1.2em;
+    transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+    background-color: var(--accent-color);
+}
+
+.prev-btn { left: 5px; }
+.next-btn { right: 5px; }
+
+/* Mobile Optimization (छोटा स्क्रीन) */
+@media (max-width: 768px) {
+    .player-card {
+        min-width: 80%;
+        margin-right: 10px;
+    }
+    .player-avatar {
+        width: 70px; /* मोबाइल पर थोड़ा छोटा, लेकिन फिर भी बड़ा */
+        height: 70px;
+    }
+    .nav-button {
+        padding: 5px 10px;
+    }
+}
+
+/* डेस्कटॉप पर कार्ड की न्यूनतम चौड़ाई थोड़ी बढ़ाएं */
+@media (min-width: 769px) {
+    .player-card {
+        min-width: 300px; 
+    }
+}
