@@ -56,7 +56,7 @@
 
     let currentMatchData = [];
     const PRIZE = ["₹25,000/-", "₹15,000/-", "₹10,000/-"];
-    const REGISTRATION_LIMIT = 0; 
+    const REGISTRATION_LIMIT = 48; 
 
 
     // =========================================================================
@@ -291,7 +291,7 @@
 
     function updateCountdown() {
         // नोट: इन तारीखों को अपने इवेंट की तारीखों से बदल लें
-        const startDate = new Date("2025-11-23T19:00:00+05:30").getTime(); // रजिस्ट्रेशन शुरू
+        const startDate = new Date("2025-11-23T12:35:00+05:30").getTime(); // रजिस्ट्रेशन शुरू
         const endDate = new Date("2025-11-25T23:59:59+05:30").getTime(); // रजिस्ट्रेशन बंद 
         const now = getISTTime().getTime();
 
@@ -300,10 +300,10 @@
             const hrsLeft = Math.floor(diff / (1000 * 60 * 60));
             const minsLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             
-            if(countdown) countdown.innerHTML = `⏳ Registration <strong>November 23th at 7 PM</strong> will start from (approximately <strong>${String(hrsLeft).padStart(2,'0')}</strong> Hours <strong>${String(minsLeft).padStart(2,'0')}</strong> minuets)`;
+            if(countdown) countdown.innerHTML = `⏳ Registration <strong>November 23th at 12 PM</strong> will start from (approximately <strong>${String(hrsLeft).padStart(2,'0')}</strong> Hours <strong>${String(minsLeft).padStart(2,'0')}</strong> minuets)`;
             
             if (ctaButton) {
-                ctaButton.textContent = "🛡️ Starts on November 22th at 7 PM.";
+                ctaButton.textContent = "🛡️ Starts on November 23th at 12 PM.";
                 ctaButton.style.backgroundColor = "#555";
                 ctaButton.style.borderColor = "#555";
                 ctaButton.style.pointerEvents = "none";
