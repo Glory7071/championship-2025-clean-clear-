@@ -292,7 +292,7 @@
     function updateCountdown() {
         // नोट: इन तारीखों को अपने इवेंट की तारीखों से बदल लें
         const startDate = new Date("2025-11-23T12:35:00+05:30").getTime(); // रजिस्ट्रेशन शुरू
-        const endDate = new Date("2025-11-25T23:59:59+05:30").getTime(); // रजिस्ट्रेशन बंद 
+        const endDate = new Date("2025-12-15T23:59:59+05:30").getTime(); // रजिस्ट्रेशन बंद 
         const now = getISTTime().getTime();
 
         if (now < startDate) {
